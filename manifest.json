@@ -1,0 +1,29 @@
+{
+   "manifest_version" : 2,
+   "name" : "Pluralsight To Trello",
+   "description" : "Parses pluralsight courses and adds them to your trello dashboard, so you can track the progress there.",
+   "version" : "0.5",
+   "page_action" : {
+      "\tdefault_icon" : "assets/icons/icon.png",
+      "default_title" : "Pluralsight To Trello",
+      "default_popup" : "popup.html"
+   },
+   "background" : {
+      "scripts" : [ "assets/javascript/eventPage.js" ],
+      "persistent" : false
+   },
+   "content_scripts" : [
+      {
+         "matches" : [ "https://app.pluralsight.com/library/courses/*" ],
+         "js" : [
+            "assets/javascript/lib/jquery-3.3.1.min.js",
+            "assets/javascript/lib/option.js",
+            "assets/javascript/lib/result.js",
+            "assets/javascript/logic/logic.js",
+            "assets/javascript/pluralsight_cs.js"
+         ],
+         "css" : [ "assets/css/pluralsight_cs.css" ]
+      }
+   ],
+   "permissions" : [ "tabs", "https://app.pluralsight.com/*" ]
+}

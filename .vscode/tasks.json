@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": ". 'C:\\Program Files (x86)\\Microsoft SDKs\\TypeScript\\2.6\\tsc.exe'",
+            "args": [
+                "-p",
+                "${workspaceRoot}\\tsconfig.json"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
