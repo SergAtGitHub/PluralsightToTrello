@@ -1,10 +1,7 @@
-/// <reference path="../declarations/jquery/index.d.ts" />
-/// <reference path="../declarations/chrome/index.d.ts" />
-/// <reference path="../lib/result.ts" />
-/// <reference path="../lib/option.ts" />
-
 import Ok = Monads.Ok;
 import Result = Monads.Result;
+import CommandProcessor = Pipelines.CommandProcessor;
+
 
 module Logic {
     interface IMessageListener {
@@ -17,19 +14,22 @@ module Logic {
         Execute(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
             if (message.action === "parseCourse") {
                 var parseArguments: CourseParserArguments = new CourseParserArguments();
-                var result = ChainCourseParser.Instance.Parse(parseArguments);
+                ChainCourseParser.Instance.process(parseArguments);
+                var result = parseArguments.Result.okOr("No result.");
 
                 if (result.isOk()) {
-                    alert(result.unwrap().Title);
+                    var data = result.unwrap();
+                    console.log(data.Title + "\n" + data.Duration);
+                    console.log(data.Sections);
                 }
                 else {
-                    alert("An error occured while parsing.");
+                    alert(result.err());
                 }
             }
         }
     }
 
-    class CourseParserArguments {
+    class CourseParserArguments extends Pipelines.QueryPipelineArguments<CourseModel> {
 
     }
 
@@ -37,17 +37,81 @@ module Logic {
         Parse(args: CourseParserArguments): Result<CourseModel, string>;
     }
 
-    class ChainCourseParser {
-        public static Instance: ChainCourseParser = new ChainCourseParser();
+    abstract class ParseCourseProcessor extends CommandProcessor<CourseParserArguments> {
+    }
 
-        Parse(args: CourseParserArguments): Result<CourseModel, string> {
-            var result = new CourseModel();
-            result.Title = $(".course-hero__title").first().text();
-            return new Ok(result);
+    abstract class FillCourseDataProcessor extends ParseCourseProcessor {
+        execute(args: CourseParserArguments): void {
+            var course = args.Result.unwrap();
+            this.fillCourse(course);
         }
+
+        abstract fillCourse(course: CourseModel) : void;
+        
+        canExecute(args: CourseParserArguments): boolean {
+            var canExecute = args.Result.isSome();
+            return super.canExecute(args) && canExecute;
+        }
+    }
+
+    class InitializeResult extends ParseCourseProcessor {
+        execute(args: CourseParserArguments): void {
+            args.Result = Monads.Some.wrapNull(new CourseModel());
+        }
+
+        canExecute(args: CourseParserArguments): boolean {
+            var canExecute = args.Result == null || args.Result.isNone();
+            return super.canExecute(args) && canExecute;
+        }
+    }
+
+    class GetCourseTitle extends FillCourseDataProcessor {
+        fillCourse(course: CourseModel): void {
+            course.Title = $(".course-hero__title").first().text();
+        }
+    }
+
+    class GetCourseDuration extends FillCourseDataProcessor {
+        fillCourse(course: CourseModel): void {
+            course.Duration = $("#ps-main .detail-list__desc").eq(3).text();
+        }
+    }
+
+    class AddSections extends FillCourseDataProcessor {
+        fillCourse(course: CourseModel): void {
+            var elements: SectionModel[] = [];
+
+            $("#ps-main .accordian__section").each((index, element) => {
+                var section = new SectionModel();
+                var el = $(element);
+                section.Title = el.find(".table-of-contents__title").text();
+                section.Duration = el.find(".table-of-contents__time").first().text();
+                elements.push(section);
+            });
+
+            course.Sections = elements;
+        }
+    }
+
+    class ChainCourseParser extends Pipelines.BasePipeline<CourseParserArguments> {
+        public static Instance: ChainCourseParser = new ChainCourseParser(
+            [
+                new InitializeResult(), 
+                new GetCourseTitle(), 
+                new GetCourseDuration(),
+                new AddSections()
+            ]
+        );
     }
 
     class CourseModel {
         Title: string;
+        Duration: string;
+        Sections: SectionModel[];
+    }
+
+    class SectionModel {
+        Title: string;
+        Duration: string;
     }
 }

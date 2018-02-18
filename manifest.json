@@ -19,6 +19,7 @@
             "assets/javascript/lib/jquery-3.3.1.min.js",
             "assets/javascript/lib/option.js",
             "assets/javascript/lib/result.js",
+            "assets/javascript/lib/pipelines.js",
             "assets/javascript/logic/logic.js",
             "assets/javascript/pluralsight_cs.js"
          ],
