@@ -1,4 +1,9 @@
 $(function () {
+$('#openOptions').click(function (e) { 
+    e.preventDefault();
+    chrome.runtime.openOptionsPage();
+});
+
     $('#parseCourse').click(function (e) {
         e.preventDefault();
 

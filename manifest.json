@@ -4,27 +4,27 @@
    "description" : "Parses pluralsight courses and adds them to your trello dashboard, so you can track the progress there.",
    "version" : "0.5",
    "page_action" : {
-      "\tdefault_icon" : "./assets/icons/icon.png",
+      "default_icon" : "./src/project/PluralsightToTrello/popup/icon.png",
       "default_title" : "Pluralsight To Trello",
-      "default_popup" : "./assets/html/popup.html"
+      "default_popup" : "./src/project/PluralsightToTrello/popup/popup.html"
    },
    "background" : {
-      "scripts" : [ "./assets/javascript/eventPage.js" ],
+      "scripts" : [ "./src/project/PluralsightToTrello/background/eventPage.js" ],
       "persistent" : false
    },
-   "options_page" : "./assets/html/options.html",
+   "options_page" : "./src/project/PluralsightToTrello/options/options.html",
    "content_scripts" : [
       {
          "matches" : [ "https://app.pluralsight.com/library/courses/*" ],
          "js" : [
-            "./assets/javascript/lib/jquery-3.3.1.min.js",
-            "./assets/javascript/lib/option.js",
-            "./assets/javascript/lib/result.js",
-            "./assets/javascript/lib/pipelines.js",
-            "./assets/javascript/logic/logic.js",
-            "./assets/javascript/pluralsight_cs.js"
+            "./src/foundation/lib/jquery-3.3.1.min.js",
+            "./src/foundation/monads/option.js",
+            "./src/foundation/monads/result.js",
+            "./src/foundation/pipelines/pipelines.js",
+            "./src/feature/ParsePluralsightCourse/logic.js",
+            "./src/project/PluralsightToTrello/content/pluralsight_cs.js"
          ],
-         "css" : [ "./assets/css/pluralsight_cs.css" ]
+         "css" : [ "./src/project/PluralsightToTrello/content/pluralsight_cs.css" ]
       }
    ],
    "permissions" : [ "tabs", "https://app.pluralsight.com/*" ]
