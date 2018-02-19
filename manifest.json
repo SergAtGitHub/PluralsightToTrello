@@ -18,11 +18,7 @@
          "matches" : [ "https://app.pluralsight.com/library/courses/*" ],
          "js" : [
             "./src/foundation/lib/jquery-3.3.1.min.js",
-            "./src/foundation/monads/option.js",
-            "./src/foundation/monads/result.js",
-            "./src/foundation/pipelines/pipelines.js",
-            "./src/feature/ParsePluralsightCourse/logic.js",
-            "./src/project/PluralsightToTrello/content/pluralsight_cs.js"
+            "./build/build.js"
          ],
          "css" : [ "./src/project/PluralsightToTrello/content/pluralsight_cs.css" ]
       }

@@ -1,3 +1,6 @@
+/// <reference path="../../foundation/monads/result" />
+/// <reference path="../../foundation/pipelines/pipelines" />
+
 import Ok = Monads.Ok;
 import Result = Monads.Result;
 import CommandProcessor = Pipelines.CommandProcessor;
