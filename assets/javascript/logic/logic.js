@@ -53,6 +53,10 @@ var Logic;
         function FillCourseDataProcessor() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
+        FillCourseDataProcessor.prototype.execute = function (args) {
+            var course = args.Result.unwrap();
+            this.fillCourse(course);
+        };
         FillCourseDataProcessor.prototype.canExecute = function (args) {
             var canExecute = args.Result.isSome();
             return _super.prototype.canExecute.call(this, args) && canExecute;
@@ -78,8 +82,8 @@ var Logic;
         function GetCourseTitle() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        GetCourseTitle.prototype.execute = function (args) {
-            args.Result.unwrap().Title = $(".course-hero__title").first().text();
+        GetCourseTitle.prototype.fillCourse = function (course) {
+            course.Title = $(".course-hero__title").first().text();
         };
         return GetCourseTitle;
     }(FillCourseDataProcessor));
@@ -88,8 +92,8 @@ var Logic;
         function GetCourseDuration() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        GetCourseDuration.prototype.execute = function (args) {
-            args.Result.unwrap().Duration = $("#ps-main .detail-list__desc").eq(3).text();
+        GetCourseDuration.prototype.fillCourse = function (course) {
+            course.Duration = $("#ps-main .detail-list__desc").eq(3).text();
         };
         return GetCourseDuration;
     }(FillCourseDataProcessor));
@@ -98,16 +102,16 @@ var Logic;
         function AddSections() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        AddSections.prototype.execute = function (args) {
+        AddSections.prototype.fillCourse = function (course) {
             var elements = [];
             $("#ps-main .accordian__section").each(function (index, element) {
                 var section = new SectionModel();
                 var el = $(element);
                 section.Title = el.find(".table-of-contents__title").text();
-                section.Duration = el.find(".table-of-contents__time").text();
+                section.Duration = el.find(".table-of-contents__time").first().text();
                 elements.push(section);
             });
-            args.Result.unwrap().Sections = elements;
+            course.Sections = elements;
         };
         return AddSections;
     }(FillCourseDataProcessor));
