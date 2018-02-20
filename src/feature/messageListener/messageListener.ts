@@ -1,4 +1,5 @@
-/// <reference path="../../foundation/pipelines/pipelines" />
+/// <reference path="../../foundation/pipelines/basePipeline.ts" />
+/// <reference path="../../foundation/pipelines/commandProcessor.ts" />
 
 module Chrome.Messages {
     export interface IMessageListener {

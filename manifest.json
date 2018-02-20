@@ -23,5 +23,5 @@
          "css" : [ "./src/project/PluralsightToTrello/content/pluralsight_cs.css" ]
       }
    ],
-   "permissions" : [ "tabs", "https://app.pluralsight.com/*" ]
+   "permissions" : [ "tabs", "storage", "https://app.pluralsight.com/*" ]
 }

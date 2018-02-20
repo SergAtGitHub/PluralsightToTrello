@@ -1,5 +1,6 @@
-/// <reference path="../../foundation/monads/result" />
-/// <reference path="../../foundation/pipelines/pipelines" />
+/// <reference path="../../foundation/pipelines/queryPipelineArguments.ts" />
+/// <reference path="../../foundation/pipelines/basePipeline.ts" />
+/// <reference path="../../foundation/pipelines/commandProcessor.ts" />
 /// <reference path="../../feature/messageListener/messageListener.ts" />
 /// <reference path="../../feature/ParsePluralsightCourse/models/courseModel.ts" />
 /// <reference path="../../feature/ParsePluralsightCourse/models/sectionModel.ts" />
@@ -74,6 +75,12 @@ module Logic {
         }
     }
 
+    class GetCourseLink extends FillCourseDataProcessor {
+        fillCourse(course: CourseModel): void {
+            course.Link = window.location.href;
+        }
+    }
+
     class AddSections extends FillCourseDataProcessor {
         fillCourse(course: CourseModel): void {
             var elements: SectionModel[] = [];
@@ -96,6 +103,7 @@ module Logic {
                 new InitializeResult(),
                 new GetCourseTitle(),
                 new GetCourseDuration(),
+                new GetCourseLink(),
                 new AddSections()
             ]
         );

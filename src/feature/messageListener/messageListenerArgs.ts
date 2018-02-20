@@ -1,3 +1,5 @@
+/// <reference path="../../foundation/pipelines/commandPipelineArguments.ts" />
+
 module Chrome.Messages {
     export class MessageListenerArgs extends Pipelines.CommandPipelineArguments {
         public static from(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): MessageListenerArgs {

@@ -1,18 +1,19 @@
 $(function () {
-    $('#loginTrello').click(function (e) {
+    $('#logOut').click(function (e) {
         e.preventDefault();
-
-        var popupOptions = {
-            type: "redirect",
-            name: "Pluralsight to Trello",
-            expiration: "1hour",
-            persist: true,
-            scope: {
-                read: 'true',
-                write: 'true' },
-            success: function() { console.log("Success") },
-        };
-
-        Trello.authorize(popupOptions);
+        Trello.deauthorize();
     });
+
+    var popupOptions = {
+        type: "redirect",
+        name: "Pluralsight to Trello",
+        expiration: "never",
+        persist: true,
+        scope: {
+            read: 'true',
+            write: 'true' },
+        success: function() { console.log(Trello.token()) },
+    };
+
+    Trello.authorize(popupOptions);
 });
