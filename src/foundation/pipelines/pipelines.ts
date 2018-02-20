@@ -1,13 +1,13 @@
 import Option = Monads.Option;
 
 module Pipelines {
-    export interface IProcessor<T> {
+    export interface IProcessor<T extends BasePipelineArguments> {
         process(arguments: T): void;
     }
 
-    export abstract class CommandProcessor<T> implements IProcessor<T> {
+    export abstract class CommandProcessor<T extends BasePipelineArguments> implements IProcessor<T> {
         process(args: T): void {
-            if (this.canExecute(args)) {
+            if (!args.IsAborted && this.canExecute(args)) {
                 this.execute(args);
             }
         }
@@ -19,7 +19,7 @@ module Pipelines {
         abstract execute(args: T): void;
     }
 
-    export class BasePipeline<T> {
+    export class BasePipeline<T extends BasePipelineArguments> {
         constructor(public processors: IProcessor<T>[]) { }
 
         process(args: T): void {
@@ -29,7 +29,14 @@ module Pipelines {
         }
     }
 
-    export class QueryPipelineArguments<T> {
+    export class BasePipelineArguments {
+        public IsAborted: boolean;
+    }
+
+    export class QueryPipelineArguments<T> extends BasePipelineArguments {
         public Result: Option<T>;
+    }
+    
+    export class CommandPipelineArguments extends BasePipelineArguments {
     }
 }

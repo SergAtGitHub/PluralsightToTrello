@@ -1,35 +1,29 @@
 /// <reference path="../../foundation/monads/result" />
 /// <reference path="../../foundation/pipelines/pipelines" />
+/// <reference path="../../feature/messageListener/messageListener.ts" />
+/// <reference path="../../feature/ParsePluralsightCourse/models/courseModel.ts" />
+/// <reference path="../../feature/ParsePluralsightCourse/models/sectionModel.ts" />
 
 import Ok = Monads.Ok;
 import Result = Monads.Result;
+import Some = Monads.Some;
 import CommandProcessor = Pipelines.CommandProcessor;
-
+import CourseModel = ParsePluralsightCourse.Models.CourseModel;
+import SectionModel = ParsePluralsightCourse.Models.SectionModel;
 
 module Logic {
-    interface IMessageListener {
-        Execute(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void;
+
+    export class ParseCourseMessageProcessor extends Chrome.Messages.BaseMessageListenerProcessor {
+        execute(args: Chrome.Messages.MessageListenerArgs): void {
+            var parseArguments: CourseParserArguments = new CourseParserArguments();
+            ChainCourseParser.Instance.process(parseArguments);
+
+            args.response = parseArguments.Result;
+        }
     }
 
-    export class ParseCourseMessageListener implements IMessageListener {
-        public static Instance: ParseCourseMessageListener = new ParseCourseMessageListener();
-
-        Execute(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
-            if (message.action === "parseCourse") {
-                var parseArguments: CourseParserArguments = new CourseParserArguments();
-                ChainCourseParser.Instance.process(parseArguments);
-                var result = parseArguments.Result.okOr("No result.");
-
-                if (result.isOk()) {
-                    var data = result.unwrap();
-                    console.log(data.Title + "\n" + data.Duration);
-                    console.log(data.Sections);
-                }
-                else {
-                    alert(result.err());
-                }
-            }
-        }
+    export class ParseCourseMessageListener extends Chrome.Messages.BaseMessageListener {
+        public static Instance: ParseCourseMessageListener = new ParseCourseMessageListener("parseCourse", [new ParseCourseMessageProcessor()]);
     }
 
     class CourseParserArguments extends Pipelines.QueryPipelineArguments<CourseModel> {
@@ -49,8 +43,8 @@ module Logic {
             this.fillCourse(course);
         }
 
-        abstract fillCourse(course: CourseModel) : void;
-        
+        abstract fillCourse(course: CourseModel): void;
+
         canExecute(args: CourseParserArguments): boolean {
             var canExecute = args.Result.isSome();
             return super.canExecute(args) && canExecute;
@@ -99,22 +93,11 @@ module Logic {
     class ChainCourseParser extends Pipelines.BasePipeline<CourseParserArguments> {
         public static Instance: ChainCourseParser = new ChainCourseParser(
             [
-                new InitializeResult(), 
-                new GetCourseTitle(), 
+                new InitializeResult(),
+                new GetCourseTitle(),
                 new GetCourseDuration(),
                 new AddSections()
             ]
         );
-    }
-
-    class CourseModel {
-        Title: string;
-        Duration: string;
-        Sections: SectionModel[];
-    }
-
-    class SectionModel {
-        Title: string;
-        Duration: string;
     }
 }
