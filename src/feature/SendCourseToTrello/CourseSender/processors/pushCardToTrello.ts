@@ -7,23 +7,16 @@ module SendCourseToTrello.CourseSender.Processors {
             var destinationList = "5a730ecd1aa97e2d48f35207";
 
             var successCard = function (cardData) {
-                var newChecklist =
+                var newChecklist:ChecklistModel =
                     {
                         name: "Table of Contents",
-                        pos: "bottom",
+                        pos: VerticalPosition.bottom,
                         idCard: cardData.id
                     };
 
                 var successCheckList = function (checklistData) {
 
-                    $.each(args.Card.Sections, function (indexInArray, valueOfElement) {
-                        var newCheckItem =
-                            {
-                                name: (indexInArray + 1).toString() + ') ' + valueOfElement.Title + ' [' + valueOfElement.Duration + ']',
-                                checked: false,
-                                pos: "bottom"
-                            };
-
+                    $.each(args.Sections, function (indexInArray, valueOfElement) {
                         var successCheckItem = function (checkItemData) {
                             console.log(checkItemData.id);
                         }
@@ -32,7 +25,7 @@ module SendCourseToTrello.CourseSender.Processors {
                             console.log(checkItemData);
                         }
 
-                        Trello.post('/checklists/' + checklistData.id + '/checkItems', newCheckItem, successCheckItem, errorCheckItem);
+                        Trello.post('/checklists/' + checklistData.id + '/checkItems', valueOfElement, successCheckItem, errorCheckItem);
                     });
                 };
 
@@ -43,16 +36,9 @@ module SendCourseToTrello.CourseSender.Processors {
                 console.log(errorMsg);
             };
 
-            var newCard =
-                {
-                    name: args.Card.Title,
-                    desc: "[link](" + args.Card.Link + ") [" + args.Card.Duration + "]",
-                    pos: "top",
-                    due: null,
-                    idList: destinationList
-                };
+            args.Card.idList = destinationList;
 
-            Trello.post('/cards/', newCard, successCard, errorCard);
+            Trello.post('/cards/', args.Card, successCard, errorCard);
         }
     }
 }

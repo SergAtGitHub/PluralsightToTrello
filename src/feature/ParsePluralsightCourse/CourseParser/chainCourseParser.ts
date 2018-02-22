@@ -3,6 +3,7 @@
 /// <reference path="./processors/getCourseTitle.ts" />
 /// <reference path="./processors/getCourseDuration.ts" />
 /// <reference path="./processors/getCourseLink.ts" />
+/// <reference path="../../../foundation/pipelines/basePipeline.ts" />
 
 module ParsePluralsightCourse.CourseParser {
     export class ChainCourseParser extends Pipelines.BasePipeline<CourseParserArguments> {
