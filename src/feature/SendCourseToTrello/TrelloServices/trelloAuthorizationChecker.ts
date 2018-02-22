@@ -1,4 +1,5 @@
 /// <reference path="../../../foundation/monads/result.ts" />
+/// <reference path="../../../foundation/declarations/trello/index.d.ts" />
 
 import Result = Monads.Result;
 
@@ -8,11 +9,11 @@ module SendCourseToTrello.TrelloServices {
         isAuthorized(): Result<boolean, string>;
     }
 
-    export class TrelloAuthorizationChecker {
+    export class TrelloAuthorizationChecker implements ITrelloAuthorizationChecker {
         public static Instance: TrelloAuthorizationChecker = new TrelloAuthorizationChecker();
 
-        public checkUserIsAuthorized() : boolean {
-            return false;
+        public isAuthorized() : Result<boolean, string> {
+            return new Monads.Ok(Trello.authorized());
         }
     }
 }
