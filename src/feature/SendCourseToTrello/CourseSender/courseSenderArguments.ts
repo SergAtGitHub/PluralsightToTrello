@@ -1,6 +1,8 @@
 /// <reference path="../TrelloServices/trelloAuthorizationChecker.ts" />
 /// <reference path="../../../foundation/pipelines/commandPipelineArguments.ts" />
+/// <reference path="../../../foundation/lib/trello.ts" />
 
+import ChecklistItemModel = TrelloModels.ChecklistItemModel;
 import ITrelloAuthorizationChecker = SendCourseToTrello.TrelloServices.ITrelloAuthorizationChecker;
 import TrelloAuthorizationChecker = SendCourseToTrello.TrelloServices.TrelloAuthorizationChecker;
 

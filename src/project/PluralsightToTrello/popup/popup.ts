@@ -16,13 +16,13 @@ $(function () {
 
         var args = new ObtainTrelloDestination.GetTrelloListArguments("5a730ecd1aa97e2d48f35205");
         ObtainTrelloDestination.TrelloListRepository.Instance.getTrelloLists(args);
-        setTimeout(() => {var s = $('<select />');
+        setTimeout(() => {var s = $('<select id="selectedList" />');
         var lists = args.Result.unwrap().lists;
 
         for (let list of lists) {
             $('<option />', {value: list.id, text: list.name}).appendTo(s);
         }
-        
+
         s.appendTo('body');}, 2000);
     } else {
         var el = $('<input id="openOptions" type="submit" value="Open options" />');
@@ -41,11 +41,12 @@ $(function () {
             chrome.tabs.sendMessage(tabs[0].id, { action: "parseCourse" },
                 (response: ParsePluralsightCourse.Models.CourseModel) =>
                     {
-                        var getCardResult = CardMapper.Instance.map(response);
+                        var listId = $("#selectedList").val().toString();
+                        var getCardResult = CardMapper.Instance.map(response, listId);
                         if (getCardResult.isErr()) { return; }
                         var card = getCardResult.unwrap();
 
-                        var checklist = response.Sections.map(x => CheckListItemMapper.Instance.map(x).unwrapOr(null))
+                        var checklist = response.Sections.map((x, num) => CheckListItemMapper.Instance.map(x, num).unwrapOr(null))
                         var arguments = ChainCourseSenderArguments.create(card, checklist)
                         ChainCourseSender.Instance.process(arguments);
                     });

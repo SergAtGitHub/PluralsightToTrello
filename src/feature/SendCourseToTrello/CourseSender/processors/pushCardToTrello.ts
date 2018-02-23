@@ -1,3 +1,4 @@
+import ChecklistModel = TrelloModels.ChecklistModel;
 
 module SendCourseToTrello.CourseSender.Processors {
     export class PushCardToTrello extends CourseSenderProcessor {
