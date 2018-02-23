@@ -6,6 +6,17 @@ $(function () {
     if (Trello.authorized()) {
         var el = $('<input id="parseCourse" type="submit" value="Parse course" />');
         $("body").append(el);
+
+        var args = new ObtainTrelloDestination.GetTrelloListArguments("5a730ecd1aa97e2d48f35205");
+        ObtainTrelloDestination.TrelloListRepository.Instance.getTrelloLists(args);
+        setTimeout(() => {var s = $('<select />');
+        var lists = args.Result.unwrap().lists;
+
+        for (let list of lists) {
+            $('<option />', {value: list.id, text: list.name}).appendTo(s);
+        }
+        
+        s.appendTo('body');}, 2000);
     } else {
         var el = $('<input id="openOptions" type="submit" value="Open options" />');
         $("body").append(el);

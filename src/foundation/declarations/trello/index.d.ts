@@ -6,6 +6,7 @@ declare var Trello: {
     setToken: (newToken: any) => void;
     rest: (method: any, ...args: any[]) => JQuery.jqXHR<any>;
     post: (url: string, data: any, success?: Function, error?: Function) => JQuery.jqXHR<any>;
+    get: (url: string, success?: Function, error?: Function) => JQuery.jqXHR<any>;
     authorized: () => boolean;
     deauthorize: () => void;
     authorize: (userOpts: any) => Function;
