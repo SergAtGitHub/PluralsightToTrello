@@ -1,7 +1,7 @@
 module Pipelines {
     export class BasePipelineArguments {
         public IsAborted: boolean;
-        public Messages: PipelineMessage[];
+        public Messages: PipelineMessage[] = [];
 
         public AddMessage(message: string) : void {
             this.AddMessageWithType(message, PipelineMessageType.Information);
