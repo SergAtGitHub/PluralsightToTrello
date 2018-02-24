@@ -19,7 +19,7 @@ module PluralsightToTrelloModelsMapper {
 
                 // _link_ [hh:mm]
                 desc:
-                    "[link](" + pluralsightModel.Link + ") ["
+                    "[Pluralsight](" + pluralsightModel.Link + ") ["
                     + pluralsightModel.Duration + "]",
 
                 pos: VerticalPosition.top,

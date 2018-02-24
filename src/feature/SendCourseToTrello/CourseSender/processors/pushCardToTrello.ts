@@ -4,9 +4,6 @@ module SendCourseToTrello.CourseSender.Processors {
     export class PushCardToTrello extends CourseSenderProcessor {
 
         execute(args: ChainCourseSenderArguments): void {
-            // Set the destination list for the new card
-            var destinationList = "5a730ecd1aa97e2d48f35207";
-
             var successCard = function (cardData) {
                 var newChecklist:ChecklistModel =
                     {
@@ -36,8 +33,6 @@ module SendCourseToTrello.CourseSender.Processors {
             var errorCard = function (errorMsg) {
                 console.log(errorMsg);
             };
-
-            args.Card.idList = destinationList;
 
             Trello.post('/cards/', args.Card, successCard, errorCard);
         }

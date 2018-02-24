@@ -12,7 +12,7 @@ module PluralsightToTrelloModelsMapper {
                 Monads.Result<ChecklistItemModel,string> {
 
             var result: ChecklistItemModel = new ChecklistItemModel();
-            result.name = `${listPosition}) ${sectionModel.Title} [${sectionModel.Duration}]`;
+            result.name = `${("00" + listPosition).slice(-2)}. ${sectionModel.Title} [${sectionModel.Duration}]`;
             result.pos = VerticalPosition.bottom;
             result.checked = false;
 
