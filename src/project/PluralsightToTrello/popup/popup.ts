@@ -69,7 +69,7 @@ $(function () {
                     if (getCardResult.isErr()) { return; }
                     var card = getCardResult.unwrap();
 
-                    var checklist = response.Sections.map((x, num) => CheckListItemMapper.Instance.map(x, num).unwrapOr(null))
+                    var checklist = response.Sections.map((x, num) => CheckListItemMapper.Instance.map(x, num + 1).unwrapOr(null))
                     var arguments = ChainCourseSenderArguments.create(card, checklist)
                     ChainCourseSender.Instance.process(arguments);
                 });
