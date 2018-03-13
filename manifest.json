@@ -18,7 +18,7 @@
          "matches" : [ "https://app.pluralsight.com/library/courses/*" ],
          "js" : [
             "./src/foundation/lib/jquery-3.3.1.min.js",
-            "./build/build.js"
+            "./build/project/PluralsightToTrello/content/Pluralsight_cs.js"
          ],
          "css" : [ "./src/project/PluralsightToTrello/content/pluralsight_cs.css" ]
       }
