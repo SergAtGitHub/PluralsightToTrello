@@ -1,6 +1,4 @@
-/// <reference path="../../foundation/pipelines/basePipelineArguments.ts" />
+import { PipelineContext } from "solid-pipelines";
 
-module Pipelines {
-    export class CommandPipelineArguments extends BasePipelineArguments {
-    }
+export class CommandPipelineArguments extends PipelineContext {
 }

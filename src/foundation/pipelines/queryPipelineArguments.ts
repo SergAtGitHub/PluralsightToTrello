@@ -1,11 +1,6 @@
-/// <reference path="../../foundation/pipelines/basePipelineArguments.ts" />
-/// <reference path="../../foundation/monads/option.ts" />
+import { Option, None } from "../monads/option";
+import { PipelineContext } from "solid-pipelines";
 
-import Option = Monads.Option;
-import None = Monads.None;
-
-module Pipelines {
-    export class QueryPipelineArguments<T> extends BasePipelineArguments {
-        public Result: Option<T> = new None();
-    }
+export class QueryPipelineArguments<T> extends PipelineContext {
+    public Result: Option<T> = new None();
 }
