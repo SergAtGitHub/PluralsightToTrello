@@ -1,7 +1,6 @@
 /// <reference path="./result.ts" />
 
-module Monads{
-
+import { Result, Err, Ok } from "./result";
 
 export interface Option<T> {
     map <U>(fn: (a: T) => U): Option<U>;
@@ -186,5 +185,4 @@ export class None<T> implements Option<T> {
     public toString(): string {
         return "None";
     }
-}
 }

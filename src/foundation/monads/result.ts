@@ -1,7 +1,7 @@
 /// <reference path="./option.ts" />
 
-module Monads
-{
+import { Some } from "./option";
+
 export interface Result<T, E> {
     map<U>(fn: (a: T) => U): Result<U, E>;
     mapErr<U>(fn: (a: E) => U): Result<T, U>;
@@ -144,5 +144,4 @@ export class Err<T, E> implements Result<T, E> {
     public toString(): string {
         return "None";
     }
-}
 }
