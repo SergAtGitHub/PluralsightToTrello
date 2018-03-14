@@ -1,35 +1,31 @@
-/// <reference path="../../foundation/pipelines/basePipeline.ts" />
-/// <reference path="../../foundation/pipelines/commandProcessor.ts" />
+import { MessageListenerArgs } from './messageListenerArgs'
+import { SafeProcessor, PipelineRunner } from 'solid-pipelines';
 
-module Chrome.Messages {
-    export interface IMessageListener {
-        onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void;
+export interface IMessageListener {
+    onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void;
+}
+
+export class BaseMessageListener implements IMessageListener {
+    constructor(public message: string, public processors: BaseMessageListenerProcessor[]) {
     }
 
-    export class BaseMessageListener extends Pipelines.BasePipeline<MessageListenerArgs> implements IMessageListener {
-        
-        constructor(public message: string, public processors: BaseMessageListenerProcessor[]) {
-            super(processors);
-        }
+    process(args: MessageListenerArgs): void {
+        var runner:PipelineRunner = new PipelineRunner();
 
-        process(args: MessageListenerArgs): void {
-            if (args.message.isSome() && this.message === args.message.unwrap().action)
-            {
-                super.process(args);
+        if (args.message.isSome() && this.message === args.message.unwrap().action) {
+            runner.RunProcessors(this.processors, args);
 
-                if (args.sendResponse.isSome() && args.response.isSome())
-                {
-                    args.sendResponse.unwrap()(args.response.unwrap());
-                }
+            if (args.sendResponse.isSome() && args.response.isSome()) {
+                args.sendResponse.unwrap()(args.response.unwrap());
             }
         }
-
-        onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
-            var args: MessageListenerArgs = MessageListenerArgs.from(message, sender, sendResponse);
-            this.process(args);
-        }
     }
 
-    export abstract class BaseMessageListenerProcessor extends Pipelines.CommandProcessor<MessageListenerArgs> {
+    onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
+        var args: MessageListenerArgs = MessageListenerArgs.from(message, sender, sendResponse);
+        this.process(args);
     }
+}
+
+export abstract class BaseMessageListenerProcessor extends SafeProcessor<MessageListenerArgs> {
 }
