@@ -1,14 +1,12 @@
-/// <reference path="./parseCourseMessageProcessor.ts" />
-/// <reference path="../../messageListener/messageListener.ts" />
+import { BaseMessageListener } from "../../messageListener/messageListener";
+import { ParseCourseMessageProcessor } from './parseCourseMessageProcessor'
 
-module ParsePluralsightCourse.MessageListener {
-    export class ParseCourseMessageListener extends Chrome.Messages.BaseMessageListener {
-        public static Instance: ParseCourseMessageListener
-            = new ParseCourseMessageListener(
-                "parseCourse",
-                [
-                    new ParseCourseMessageProcessor()
-                ]
-            );
-    }
+export class ParseCourseMessageListener extends BaseMessageListener {
+    public static Instance: ParseCourseMessageListener
+        = new ParseCourseMessageListener(
+            "parseCourse",
+            [
+                new ParseCourseMessageProcessor()
+            ]
+        );
 }

@@ -1,14 +1,13 @@
-/// <reference path="../CourseParser/courseParserArguments.ts" />
-/// <reference path="../CourseParser/courseParserArguments.ts" />
-/// <reference path="../../messageListener/messageListener.ts" />
+import { BaseMessageListenerProcessor } from "../../messageListener/messageListener";
+import { MessageListenerArgs } from "../../messageListener/messageListenerArgs";
+import CourseParserArguments from "../CourseParser/courseParserArguments";
+import { ChainCourseParser } from "../CourseParser/chainCourseParser";
 
-module ParsePluralsightCourse.MessageListener {
-    export class ParseCourseMessageProcessor extends Chrome.Messages.BaseMessageListenerProcessor {
-        execute(args: Chrome.Messages.MessageListenerArgs): void {
-            var parseArguments: CourseParser.CourseParserArguments = new CourseParser.CourseParserArguments();
-            CourseParser.ChainCourseParser.Instance.process(parseArguments);
+export class ParseCourseMessageProcessor extends BaseMessageListenerProcessor {
+    async SafeExecute(args: MessageListenerArgs): Promise<void> {
+        var parseArguments: CourseParserArguments = new CourseParserArguments();
+        ChainCourseParser.Instance.process(parseArguments);
 
-            args.response = parseArguments.Result;
-        }
+        args.response = parseArguments.Result;
     }
 }
