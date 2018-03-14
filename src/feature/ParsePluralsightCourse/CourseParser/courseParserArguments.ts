@@ -1,8 +1,5 @@
-/// <reference path="../../../foundation/pipelines/queryPipelineArguments.ts" />
-/// <reference path="../models/courseModel.ts" />
+import { QueryPipelineArguments } from '../../../foundation/pipelines/queryPipelineArguments'
+import { CourseModel } from "../models";
 
-module ParsePluralsightCourse.CourseParser {
-    export class CourseParserArguments extends Pipelines.QueryPipelineArguments<ParsePluralsightCourse.Models.CourseModel> {
-
-    }
+export default class CourseParserArguments extends QueryPipelineArguments<CourseModel> {
 }

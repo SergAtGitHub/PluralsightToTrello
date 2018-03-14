@@ -1,6 +1,5 @@
-/// <reference path="../../../foundation/pipelines/commandProcessor.ts" />
+import { SafeProcessor } from 'solid-pipelines'
+import CourseParserArguments from './courseParserArguments'
 
-module ParsePluralsightCourse.CourseParser {
-    export abstract class ParseCourseProcessor extends Pipelines.CommandProcessor<CourseParserArguments> {
-    }
+export abstract class ParseCourseProcessor extends SafeProcessor<CourseParserArguments> {
 }

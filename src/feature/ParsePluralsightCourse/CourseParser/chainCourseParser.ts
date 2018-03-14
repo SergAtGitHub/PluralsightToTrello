@@ -1,20 +1,20 @@
-/// <reference path="./processors/addSections.ts" />
-/// <reference path="./processors/initializeResult.ts" />
-/// <reference path="./processors/getCourseTitle.ts" />
-/// <reference path="./processors/getCourseDuration.ts" />
-/// <reference path="./processors/getCourseLink.ts" />
-/// <reference path="../../../foundation/pipelines/basePipeline.ts" />
+import CourseParserArguments from './courseParserArguments'
+import { PipelineRunner } from 'solid-pipelines';
+import * as Processors from './processors';
 
-module ParsePluralsightCourse.CourseParser {
-    export class ChainCourseParser extends Pipelines.BasePipeline<CourseParserArguments> {
-        public static Instance: ChainCourseParser = new ChainCourseParser(
+export class ChainCourseParser {
+    public static Instance: ChainCourseParser = new ChainCourseParser();
+
+    public process(args: CourseParserArguments):void {
+        var runner:PipelineRunner = new PipelineRunner();
+
+        runner.RunProcessors(
             [
                 new Processors.InitializeResult(),
                 new Processors.GetCourseTitle(),
                 new Processors.GetCourseDuration(),
                 new Processors.GetCourseLink(),
                 new Processors.AddSections()
-            ]
-        );
+            ], args);
     }
 }
