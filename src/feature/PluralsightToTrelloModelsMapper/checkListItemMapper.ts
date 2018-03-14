@@ -1,22 +1,19 @@
-/// <reference path="../../foundation/declarations/trello/index.d.ts" />
-/// <reference path="../../foundation/monads/result.ts" />
-/// <reference path="../../foundation/lib/trello.ts" />
-/// <reference path="../ParsePluralsightCourse/models/sectionModel.ts" />
+import { SectionModel } from "../ParsePluralsightCourse/models";
+import { Result, Ok } from "../../foundation/monads/result";
+import { ChecklistItemModel, VerticalPosition } from "../../foundation/lib/trello";
 
-module PluralsightToTrelloModelsMapper {
-    export class CheckListItemMapper {
-        public static Instance: CheckListItemMapper = new CheckListItemMapper();
+export class CheckListItemMapper {
+    public static Instance: CheckListItemMapper = new CheckListItemMapper();
 
-        map(
-            sectionModel: ParsePluralsightCourse.Models.SectionModel, listPosition:number):
-                Monads.Result<ChecklistItemModel,string> {
+    map(
+        sectionModel: SectionModel, listPosition: number):
+        Result<ChecklistItemModel, string> {
 
-            var result: ChecklistItemModel = new ChecklistItemModel();
-            result.name = `${("00" + listPosition).slice(-2)}. _${sectionModel.Title}_ [${sectionModel.Duration}]`;
-            result.pos = VerticalPosition.bottom;
-            result.checked = false;
+        var result: ChecklistItemModel = new ChecklistItemModel();
+        result.name = `${("00" + listPosition).slice(-2)}. _${sectionModel.Title}_ [${sectionModel.Duration}]`;
+        result.pos = VerticalPosition.bottom;
+        result.checked = false;
 
-            return new Monads.Ok(result);
-        }
+        return new Ok(result);
     }
 }

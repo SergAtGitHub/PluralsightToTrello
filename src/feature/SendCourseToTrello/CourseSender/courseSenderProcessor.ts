@@ -1,4 +1,5 @@
-module SendCourseToTrello.CourseSender {
-    export abstract class CourseSenderProcessor extends Pipelines.CommandProcessor<ChainCourseSenderArguments> {
-    }
+import { SafeProcessor } from 'solid-pipelines'
+import {ChainCourseSenderArguments} from './courseSenderArguments'
+
+export abstract class CourseSenderProcessor extends SafeProcessor<ChainCourseSenderArguments> {
 }

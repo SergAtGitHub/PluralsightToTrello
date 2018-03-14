@@ -1,32 +1,26 @@
-/// <reference path="../../foundation/declarations/trello/index.d.ts" />
-/// <reference path="../../foundation/monads/result.ts" />
-/// <reference path="../../foundation/lib/trello.ts" />
-/// <reference path="../ParsePluralsightCourse/models/courseModel.ts" />
+import { CourseModel } from "../ParsePluralsightCourse/models";
+import { Result, Ok } from "../../foundation/monads/result";
+import { VerticalPosition, CardModel } from "../../foundation/lib/trello";
 
-import CardModel = TrelloModels.CardModel;
-import VerticalPosition = TrelloModels.VerticalPosition;
+export class CardMapper {
+    public static Instance: CardMapper = new CardMapper();
 
-module PluralsightToTrelloModelsMapper {
-    export class CardMapper {
-        public static Instance: CardMapper = new CardMapper();
+    map(
+        pluralsightModel: CourseModel, listId: string):
+        Result<CardModel, string> {
 
-        map(
-            pluralsightModel: ParsePluralsightCourse.Models.CourseModel, listId: string):
-            Monads.Result<CardModel, string> {
+        var result: CardModel = {
+            name: pluralsightModel.Title,
 
-            var result: CardModel = {
-                name: pluralsightModel.Title,
+            // _link_ [hh:mm]
+            desc:
+                "[Pluralsight](" + pluralsightModel.Link + ") ["
+                + pluralsightModel.Duration + "]",
 
-                // _link_ [hh:mm]
-                desc:
-                    "[Pluralsight](" + pluralsightModel.Link + ") ["
-                    + pluralsightModel.Duration + "]",
-
-                pos: VerticalPosition.top,
-                due: null,
-                idList: listId
-            };
-            return new Monads.Ok(result);
-        }
+            pos: VerticalPosition.top,
+            due: null,
+            idList: listId
+        };
+        return new Ok(result);
     }
 }
