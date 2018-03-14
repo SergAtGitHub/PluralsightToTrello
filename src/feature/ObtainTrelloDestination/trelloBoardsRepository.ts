@@ -37,6 +37,8 @@ export class TryToRetrieveBoard extends GetTrelloBoardProcessor {
 }
 
 export class TrelloBoardRepository {
+    public static Instance:TrelloBoardRepository = new TrelloBoardRepository();
+
     getTrelloBoards(args: GetTrelloBoardArguments): Result<TrelloBoardsCollectionApiReturnResult, string> {
         var runner:PipelineRunner = new PipelineRunner();
         runner.RunProcessor(new TryToRetrieveBoard(), args);

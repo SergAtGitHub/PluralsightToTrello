@@ -1,7 +1,4 @@
-/// <reference path="../../../feature/ParsePluralsightCourse/MessageListener/parseCourseMessageListener.ts" />
-/// <reference path="../../../feature/messageListener/messageListener.ts" />
-
-import ParseCourseMessageListener = ParsePluralsightCourse.MessageListener.ParseCourseMessageListener;
+import { ParseCourseMessageListener } from "../../../feature/ParsePluralsightCourse/MessageListener/parseCourseMessageListener";
 
 chrome.runtime.onMessage.addListener(
     (message, sender, sendResponse) =>

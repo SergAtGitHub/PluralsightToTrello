@@ -1,18 +1,19 @@
-/// <reference path="../../../foundation/declarations/chrome/index.d.ts" />
-/// <reference path="../../../feature/PluralsightToTrelloModelsMapper/cardMapper.ts" />
-/// <reference path="../../../feature/PluralsightToTrelloModelsMapper/checkListItemMapper.ts" />
+/// <reference path="../../../foundation/declarations/trello/index.d.ts" />
 
-import CardMapper = PluralsightToTrelloModelsMapper.CardMapper;
-import CheckListItemMapper = PluralsightToTrelloModelsMapper.CheckListItemMapper;
-import ChainCourseSenderArguments = SendCourseToTrello.CourseSender.ChainCourseSenderArguments;
-import ChainCourseSender = SendCourseToTrello.CourseSender.ChainCourseSender;
+import { GetTrelloBoardArguments, TrelloBoardRepository } from "../../../feature/ObtainTrelloDestination/trelloBoardsRepository";
+import { GetTrelloListArguments, TrelloListRepository } from "../../../feature/ObtainTrelloDestination/trelloListRepository";
+import { CourseModel } from "../../../feature/ParsePluralsightCourse/models";
+import { CardMapper } from "../../../feature/PluralsightToTrelloModelsMapper/cardMapper";
+import { CheckListItemMapper } from "../../../feature/PluralsightToTrelloModelsMapper/checkListItemMapper";
+import { ChainCourseSenderArguments } from "../../../feature/SendCourseToTrello/CourseSender/courseSenderArguments";
+import { ChainCourseSender } from "../../../feature/SendCourseToTrello/CourseSender/chainCourseSender";
 
 $(function () {
 
     Trello.authorize({});
     if (Trello.authorized()) {
-        var getTrelloBoardsArgs = new ObtainTrelloDestination.GetTrelloBoardArguments();
-        ObtainTrelloDestination.TrelloBoardRepository.Instance.getTrelloBoards(getTrelloBoardsArgs);
+        var getTrelloBoardsArgs = new GetTrelloBoardArguments();
+        TrelloBoardRepository.Instance.getTrelloBoards(getTrelloBoardsArgs);
         setTimeout(() => {
             var s = $('<select id="selectedBoard" />');
             var boards = getTrelloBoardsArgs.Result.unwrap().Boards;
@@ -29,8 +30,8 @@ $(function () {
             $('#selectedBoard').change(function (e) {
                 e.preventDefault();
 
-                var args = new ObtainTrelloDestination.GetTrelloListArguments($("#selectedBoard").val().toString());
-                ObtainTrelloDestination.TrelloListRepository.Instance.getTrelloLists(args);
+                var args = new GetTrelloListArguments($("#selectedBoard").val().toString());
+                TrelloListRepository.Instance.getTrelloLists(args);
                 setTimeout(() => {
                     var s = $('#selectedList');
                     s.empty();
@@ -63,15 +64,15 @@ $(function () {
 
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, { action: "parseCourse" },
-                (response: ParsePluralsightCourse.Models.CourseModel) => {
+                (response: CourseModel) => {
                     var listId = $("#selectedList").val().toString();
                     var getCardResult = CardMapper.Instance.map(response, listId);
                     if (getCardResult.isErr()) { return; }
                     var card = getCardResult.unwrap();
 
                     var checklist = response.Sections.map((x, num) => CheckListItemMapper.Instance.map(x, num + 1).unwrapOr(null))
-                    var arguments = ChainCourseSenderArguments.create(card, checklist)
-                    ChainCourseSender.Instance.process(arguments);
+                    var args = ChainCourseSenderArguments.create(card, checklist)
+                    ChainCourseSender.Instance.execute(args);
                 });
         });
     });

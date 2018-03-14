@@ -1,16 +1,18 @@
 import { PipelineRunner } from "solid-pipelines";
-import { CourseSenderArguments } from './courseSenderArguments'
+import { ChainCourseSenderArguments } from './courseSenderArguments'
+import { CheckUserAuthorized } from './processors/checkUserAuthorized'
+import { PushCardToTrello } from './processors/pushCardToTrello'
 
 export class ChainCourseSender {
     public static Instance: ChainCourseSender = new ChainCourseSender();
 
-    execute(args:CourseSenderArguments) : void {
+    execute(args:ChainCourseSenderArguments) : void {
         var runner:PipelineRunner = new PipelineRunner();
 
         runner.RunProcessors(
             [
-                new Processors.CheckUserAuthorized(),
-                new Processors.PushCardToTrello()
+                new CheckUserAuthorized(),
+                new PushCardToTrello()
             ], args);
     }
 }

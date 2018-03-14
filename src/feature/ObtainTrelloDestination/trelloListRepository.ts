@@ -43,6 +43,8 @@ export class TryToRetrieveList extends GetTrelloListProcessor {
 }
 
 export class TrelloListRepository {
+    public static Instance:TrelloListRepository = new TrelloListRepository();
+
     getTrelloListsByBoard(boardId: string): Result<TrelloListsCollectionApiReturnResult, string> {
         var args = new GetTrelloListArguments(boardId);
         return this.getTrelloLists(args);
