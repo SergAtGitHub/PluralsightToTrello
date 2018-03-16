@@ -5,10 +5,10 @@ import * as Processors from './processors';
 export class ChainCourseParser {
     public static Instance: ChainCourseParser = new ChainCourseParser();
 
-    public process(args: CourseParserArguments):void {
+    public process(args: CourseParserArguments): Promise<void> {
         var runner:PipelineRunner = new PipelineRunner();
 
-        runner.RunProcessors(
+        return runner.RunProcessors(
             [
                 new Processors.InitializeResult(),
                 new Processors.GetCourseTitle(),

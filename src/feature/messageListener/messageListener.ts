@@ -9,11 +9,11 @@ export class BaseMessageListener implements IMessageListener {
     constructor(public message: string, public processors: BaseMessageListenerProcessor[]) {
     }
 
-    process(args: MessageListenerArgs): void {
+    async process(args: MessageListenerArgs): Promise<void> {
         var runner:PipelineRunner = new PipelineRunner();
 
         if (args.message.isSome() && this.message === args.message.unwrap().action) {
-            runner.RunProcessors(this.processors, args);
+            await runner.RunProcessors(this.processors, args);
 
             if (args.sendResponse.isSome() && args.response.isSome()) {
                 args.sendResponse.unwrap()(args.response.unwrap());
