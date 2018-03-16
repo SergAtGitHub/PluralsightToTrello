@@ -21,7 +21,6 @@
                 "https://app.pluralsight.com/library/courses/*"
             ],
             "js": [
-                "./js/jquery.js",
                 "./js/content.js"
             ]
         }
