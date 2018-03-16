@@ -282,4 +282,11 @@ isReady = (name, value) ->
 isFunction = (val) ->
   typeof val == "function"
 
+opts = 
+  version: 1
+  apiEndpoint:"https://api.trello.com"
+  authEndpoint:"https://trello.com"
+  intentEndpoint:"https://trello.com"
+  key:"bc80563c853c5fa76d4b271b77bcb23c"
+
 wrapper(window, jQuery, opts)
