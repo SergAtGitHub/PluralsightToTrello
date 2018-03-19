@@ -11,7 +11,7 @@
     },
     "files": [
         "./src/project/PluralsightToTrello/options/options.js",
-        "./src/project/PluralsightToTrello/background/eventPage.js",
+        "./src/project/PluralsightToTrello/background/eventPage.ts",
         "./src/project/PluralsightToTrello/popup/popup.ts",
         "./src/project/PluralsightToTrello/content/Pluralsight_cs.ts",
         "./node_modules/solid-pipelines/lib/index.d.ts"

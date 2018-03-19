@@ -8,7 +8,7 @@ module.exports = {
 		popup: './project/PluralsightToTrello/popup/popup.ts',
 		content: './project/PluralsightToTrello/content/pluralsight_cs.ts',
 		options: './project/PluralsightToTrello/options/options.js',
-		background: './project/PluralsightToTrello/background/eventPage.js',
+		background: './project/PluralsightToTrello/background/eventPage.ts',
 		trello: './foundation/TrelloApi/client.coffee'
 	},
 	resolve: {
