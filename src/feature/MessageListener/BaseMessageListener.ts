@@ -1,9 +1,5 @@
-import { MessageListenerArgs } from './messageListenerArgs'
-import { SafeProcessor, PipelineRunner } from 'solid-pipelines';
-
-export interface IMessageListener {
-    onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void;
-}
+import {IMessageListener, BaseMessageListenerProcessor, MessageListenerArgs } from './index';
+import { PipelineRunner } from 'solid-pipelines';
 
 export class BaseMessageListener implements IMessageListener {
     constructor(public message: string, public processors: BaseMessageListenerProcessor[]) {
@@ -25,7 +21,4 @@ export class BaseMessageListener implements IMessageListener {
         var args: MessageListenerArgs = MessageListenerArgs.from(message, sender, sendResponse);
         this.process(args);
     }
-}
-
-export abstract class BaseMessageListenerProcessor extends SafeProcessor<MessageListenerArgs> {
 }

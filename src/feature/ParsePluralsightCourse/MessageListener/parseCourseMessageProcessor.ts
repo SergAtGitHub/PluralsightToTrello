@@ -1,4 +1,4 @@
-import { BaseMessageListenerProcessor } from "../../messageListener/messageListener";
+import { BaseMessageListenerProcessor } from "../../index";
 import { MessageListenerArgs } from "../../messageListener/messageListenerArgs";
 import CourseParserArguments from "../CourseParser/courseParserArguments";
 import { ChainCourseParser } from "../CourseParser/chainCourseParser";
