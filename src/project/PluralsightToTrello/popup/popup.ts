@@ -1,11 +1,15 @@
-import { GetTrelloBoardArguments, TrelloBoardRepository } from "../../../feature/ObtainTrelloDestination/trelloBoardsRepository";
-import { GetTrelloListArguments, TrelloListRepository } from "../../../feature/ObtainTrelloDestination/trelloListRepository";
+import { 
+    Trello, 
+    GetTrelloBoardArguments, 
+    TrelloBoardRepository, 
+    GetTrelloListArguments, 
+    TrelloListRepository 
+} from "../..";
 import { CourseModel } from "../../../feature/ParsePluralsightCourse/models";
 import { CardMapper } from "../../../feature/PluralsightToTrelloModelsMapper/cardMapper";
 import { CheckListItemMapper } from "../../../feature/PluralsightToTrelloModelsMapper/checkListItemMapper";
 import { ChainCourseSenderArguments } from "../../../feature/SendCourseToTrello/CourseSender/courseSenderArguments";
 import { ChainCourseSender } from "../../../feature/SendCourseToTrello/CourseSender/chainCourseSender";
-import { Trello } from '../../../foundation'
 
 $(function () {
 
