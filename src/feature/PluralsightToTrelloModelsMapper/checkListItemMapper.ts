@@ -1,6 +1,5 @@
 import { SectionModel } from "../ParsePluralsightCourse/models";
-import { Result, Ok } from "../../foundation/monads/result";
-import { ChecklistItemModel, VerticalPosition } from "../../foundation/lib/trello";
+import { Result, Ok, ChecklistItemModel, VerticalPosition } from "../../foundation";
 
 export class CheckListItemMapper {
     public static Instance: CheckListItemMapper = new CheckListItemMapper();

@@ -1,10 +1,5 @@
-/// <reference path="../../foundation/declarations/trello/index.d.ts" />
-
-import { TrelloBoardApiReturnResult } from "./trelloBoardApiReturnResult";
-import { QueryPipelineArguments } from '../../foundation/pipelines/queryPipelineArguments'
+import { Trello, TrelloBoardApiReturnResult, QueryPipelineArguments, Some, Result } from "../../foundation";
 import { SafeProcessor, MessageFilter, PipelineRunner } from "solid-pipelines";
-import { Some } from "../../foundation/monads/option";
-import { Result } from "../../foundation/monads/result";
 
 export class TrelloBoardsCollectionApiReturnResult {
     Boards: TrelloBoardApiReturnResult[];

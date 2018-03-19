@@ -1,6 +1,6 @@
 import { CourseSenderProcessor } from "../courseSenderProcessor";
 import { ChainCourseSenderArguments } from "../courseSenderArguments";
-import { ChecklistModel, VerticalPosition } from "../../../../foundation/lib/trello";
+import { Trello, ChecklistModel, VerticalPosition } from "../../../../foundation";
 
 export class PushCardToTrello extends CourseSenderProcessor {
 

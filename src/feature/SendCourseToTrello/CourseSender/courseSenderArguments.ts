@@ -1,7 +1,5 @@
-import {CommandPipelineArguments} from '../../../foundation/pipelines/commandPipelineArguments'
-import { Option, Some } from '../../../foundation/monads/option';
+import { CommandPipelineArguments, Option, Some, CardModel, ChecklistItemModel } from '../../../foundation'
 import { ITrelloAuthorizationChecker, TrelloAuthorizationChecker } from '../TrelloServices/trelloAuthorizationChecker';
-import { CardModel,ChecklistItemModel  } from '../../../foundation/lib/trello'
 
 export class ChainCourseSenderArguments extends CommandPipelineArguments {
     public static create(card: CardModel, items: ChecklistItemModel[]): ChainCourseSenderArguments {

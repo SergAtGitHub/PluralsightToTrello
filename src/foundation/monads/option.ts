@@ -1,5 +1,3 @@
-/// <reference path="./result.ts" />
-
 import { Result, Err, Ok } from "./result";
 
 export interface Option<T> {

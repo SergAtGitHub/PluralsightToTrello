@@ -1,5 +1,3 @@
-/// <reference path="../../../foundation/declarations/trello/index.d.ts" />
-
 import { GetTrelloBoardArguments, TrelloBoardRepository } from "../../../feature/ObtainTrelloDestination/trelloBoardsRepository";
 import { GetTrelloListArguments, TrelloListRepository } from "../../../feature/ObtainTrelloDestination/trelloListRepository";
 import { CourseModel } from "../../../feature/ParsePluralsightCourse/models";
@@ -7,6 +5,7 @@ import { CardMapper } from "../../../feature/PluralsightToTrelloModelsMapper/car
 import { CheckListItemMapper } from "../../../feature/PluralsightToTrelloModelsMapper/checkListItemMapper";
 import { ChainCourseSenderArguments } from "../../../feature/SendCourseToTrello/CourseSender/courseSenderArguments";
 import { ChainCourseSender } from "../../../feature/SendCourseToTrello/CourseSender/chainCourseSender";
+import { Trello } from '../../../foundation'
 
 $(function () {
 

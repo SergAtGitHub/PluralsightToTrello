@@ -1,6 +1,4 @@
-/// <reference path="../../../foundation/declarations/trello/index.d.ts" />
-
-import { Result, Ok } from "../../../foundation/monads/result";
+import { Trello, Result, Ok } from "../../../foundation";
 
 export interface ITrelloAuthorizationChecker {
     isAuthorized(): Result<boolean, string>;

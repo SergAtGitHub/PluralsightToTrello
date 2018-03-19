@@ -1,4 +1,4 @@
-declare var Trello: {
+export declare var Trello: {
     version: () => any;
     key: () => any;
     setKey: (newKey: any) => void;
@@ -12,3 +12,6 @@ declare var Trello: {
     authorize: (userOpts: any) => Function;
     addCard: (options: any, next: any) => any;
 };
+
+export * from './Requests'
+export * from './Responses'

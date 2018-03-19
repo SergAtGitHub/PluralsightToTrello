@@ -1,7 +1,5 @@
-import { QueryPipelineArguments } from "../../foundation/pipelines/queryPipelineArguments";
-import { Some } from "../../foundation/monads/option";
+import { QueryPipelineArguments, Some,  Trello, Result } from "../../foundation";
 import { MessageFilter, PipelineRunner, SafeProcessor } from "solid-pipelines";
-import { Result } from "../../foundation/monads/result";
 
 export class TrelloListsCollectionApiReturnResult {
     lists: TrelloListApiReturnResult[];

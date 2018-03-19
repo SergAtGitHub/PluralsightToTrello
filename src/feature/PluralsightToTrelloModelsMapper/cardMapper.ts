@@ -1,6 +1,5 @@
 import { CourseModel } from "../ParsePluralsightCourse/models";
-import { Result, Ok } from "../../foundation/monads/result";
-import { VerticalPosition, CardModel } from "../../foundation/lib/trello";
+import { Result, Ok, VerticalPosition, CardModel } from "../../foundation";
 
 export class CardMapper {
     public static Instance: CardMapper = new CardMapper();
