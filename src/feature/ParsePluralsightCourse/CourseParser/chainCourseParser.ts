@@ -1,12 +1,11 @@
-import CourseParserArguments from './courseParserArguments'
 import { PipelineRunner } from 'solid-pipelines';
-import * as Processors from './processors';
+import { Processors, CourseParserArguments } from '.'
 
 export class ChainCourseParser {
     public static Instance: ChainCourseParser = new ChainCourseParser();
 
     public process(args: CourseParserArguments): Promise<void> {
-        var runner:PipelineRunner = new PipelineRunner();
+        var runner: PipelineRunner = new PipelineRunner();
 
         return runner.RunProcessors(
             [

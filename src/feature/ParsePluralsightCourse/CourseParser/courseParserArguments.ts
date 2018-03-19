@@ -1,5 +1,5 @@
-import { QueryPipelineArguments } from '../../../foundation/pipelines/queryPipelineArguments'
+import { QueryPipelineArguments } from '../..'
 import { CourseModel } from "../models";
 
-export default class CourseParserArguments extends QueryPipelineArguments<CourseModel> {
+export class CourseParserArguments extends QueryPipelineArguments<CourseModel> {
 }

@@ -1,7 +1,6 @@
-import { CourseModel, SectionModel } from "../models";
-import { ParseCourseProcessor } from "./parseCourseProcessor";
-import CourseParserArguments from "./courseParserArguments";
-import { Some } from "../../../foundation/monads/option";
+import { CourseModel, SectionModel } from "../../models";
+import { ParseCourseProcessor, CourseParserArguments } from "..";
+import { Some } from "../../..";
 
 export abstract class FillCourseDataProcessor extends ParseCourseProcessor {
     async SafeExecute(args: CourseParserArguments): Promise<void> {
