@@ -9,10 +9,10 @@ module.exports = {
 		content: './project/PluralsightToTrello/content/pluralsight_cs.ts',
 		options: './project/PluralsightToTrello/options/options.js',
 		background: './project/PluralsightToTrello/background/eventPage.js',
-		trello: './foundation/lib/client.coffee'
+		trello: './foundation/TrelloApi/client.coffee'
 	},
 	resolve: {
-		extensions: [".ts", ".js"]
+		extensions: [".js", ".ts", ".d.ts"]
 	},
 	output: {
 		path: path.resolve('build/dist'),
@@ -23,7 +23,8 @@ module.exports = {
 			{
 				test: /\.ts$/,
 				exclude: "/node_modules/",
-				loader: "ts-loader"
+				loader: "ts-loader",
+				options: { configFile : "tsconfig.json" }
 			},
 			{
 				test: /\.coffee$/,
