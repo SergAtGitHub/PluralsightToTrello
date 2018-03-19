@@ -1,5 +1,6 @@
+/// <reference path="../../../foundation/TrelloApi/client.d.ts" />
 import { GetTrelloListArguments, GetTrelloListProcessor, TrelloListsCollectionApiReturnResult, TrelloListApiReturnResult } from '.'
-import { Some, Trello } from '../..';
+import { Some } from '../..';
 
 export class TryToRetrieveList extends GetTrelloListProcessor {
     async SafeExecute(args: GetTrelloListArguments): Promise<void> {

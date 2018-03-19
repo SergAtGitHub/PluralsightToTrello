@@ -1,5 +1,5 @@
-import { 
-    Trello, 
+/// <reference path="../../../foundation/TrelloApi/client.d.ts" />
+import {  
     GetTrelloBoardArguments, 
     TrelloBoardRepository, 
     GetTrelloListArguments, 

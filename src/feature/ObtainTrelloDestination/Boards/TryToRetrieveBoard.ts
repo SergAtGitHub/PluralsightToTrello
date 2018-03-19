@@ -1,5 +1,7 @@
+/// <reference path="../../../foundation/TrelloApi/client.d.ts" />
+
 import { GetTrelloBoardProcessor, GetTrelloBoardArguments, TrelloBoardsCollectionApiReturnResult } from ".";
-import { Trello, TrelloBoardApiReturnResult, Some } from '../../../foundation'
+import { TrelloBoardApiReturnResult, Some } from '../..'
 
 export class TryToRetrieveBoard extends GetTrelloBoardProcessor {
     async SafeExecute(args: GetTrelloBoardArguments): Promise<void> {
