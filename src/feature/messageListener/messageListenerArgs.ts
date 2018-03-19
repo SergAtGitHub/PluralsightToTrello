@@ -1,4 +1,4 @@
-import * as Monads from '../../foundation/monads/option'
+import * as Monads from '../../foundation'
 import { PipelineContext } from 'solid-pipelines';
 
 export class MessageListenerArgs extends PipelineContext {

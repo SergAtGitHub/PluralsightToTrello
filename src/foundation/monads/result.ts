@@ -1,6 +1,4 @@
-/// <reference path="./option.ts" />
-
-import { Some, Option, None } from "./option";
+import { Some, Option, None } from ".";
 
 export interface Result<T, E> {
     map<U>(fn: (a: T) => U): Result<U, E>;

@@ -1,4 +1,4 @@
-import { Option, None } from "../monads/option";
+import { Option, None } from "..";
 import { PipelineContext } from "solid-pipelines";
 
 export class QueryPipelineArguments<T> extends PipelineContext {

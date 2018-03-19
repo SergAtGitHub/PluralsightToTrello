@@ -1,4 +1,4 @@
-import { Result, Err, Ok } from "./result";
+import { Result, Err, Ok } from ".";
 
 export interface Option<T> {
     map <U>(fn: (a: T) => U): Option<U>;
