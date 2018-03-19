@@ -3,9 +3,9 @@ import {
     GetTrelloBoardArguments, 
     TrelloBoardRepository, 
     GetTrelloListArguments, 
-    TrelloListRepository 
+    TrelloListRepository,
+    CourseModel
 } from "../..";
-import { CourseModel } from "../../../feature/ParsePluralsightCourse/models";
 import { CardMapper } from "../../../feature/PluralsightToTrelloModelsMapper/cardMapper";
 import { CheckListItemMapper } from "../../../feature/PluralsightToTrelloModelsMapper/checkListItemMapper";
 import { ChainCourseSenderArguments } from "../../../feature/SendCourseToTrello/CourseSender/courseSenderArguments";
