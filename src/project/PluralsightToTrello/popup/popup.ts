@@ -6,10 +6,6 @@ import {
     TrelloListRepository,
     CourseModel
 } from "../..";
-import { CardMapper } from "../../../feature/PluralsightToTrelloModelsMapper/cardMapper";
-import { CheckListItemMapper } from "../../../feature/PluralsightToTrelloModelsMapper/checkListItemMapper";
-import { ChainCourseSenderArguments } from "../../../feature/SendCourseToTrello/CourseSender/courseSenderArguments";
-import { ChainCourseSender } from "../../../feature/SendCourseToTrello/CourseSender/chainCourseSender";
 
 $(function () {
 
@@ -66,17 +62,7 @@ $(function () {
         e.preventDefault();
 
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, { action: "parseCourse" },
-                (response: CourseModel) => {
-                    var listId = $("#selectedList").val().toString();
-                    var getCardResult = CardMapper.Instance.map(response, listId);
-                    if (getCardResult.isErr()) { return; }
-                    var card = getCardResult.unwrap();
-
-                    var checklist = response.Sections.map((x, num) => CheckListItemMapper.Instance.map(x, num + 1).unwrapOr(null))
-                    var args = ChainCourseSenderArguments.create(card, checklist)
-                    ChainCourseSender.Instance.execute(args);
-                });
+            chrome.tabs.sendMessage(tabs[0].id, { action: "parseCourse" });
         });
     });
 });

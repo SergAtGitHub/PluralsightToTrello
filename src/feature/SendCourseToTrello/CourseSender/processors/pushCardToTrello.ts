@@ -1,6 +1,6 @@
 /// <reference path="../../../../foundation/TrelloApi/client.d.ts" />
 import { CourseSenderProcessor } from "../courseSenderProcessor";
-import { ChainCourseSenderArguments } from "../courseSenderArguments";
+import { ChainCourseSenderArguments } from "../ChainCourseSenderArguments";
 import { ChecklistModel, VerticalPosition } from "../../../../foundation";
 
 export class PushCardToTrello extends CourseSenderProcessor {

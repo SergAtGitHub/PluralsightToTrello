@@ -1,5 +1,5 @@
 import {CourseSenderProcessor} from '../courseSenderProcessor'
-import { ChainCourseSenderArguments } from '../courseSenderArguments';
+import { ChainCourseSenderArguments } from '../ChainCourseSenderArguments';
 import { Result } from '../../../../foundation/monads/result';
 
 export class CheckUserAuthorized extends CourseSenderProcessor {

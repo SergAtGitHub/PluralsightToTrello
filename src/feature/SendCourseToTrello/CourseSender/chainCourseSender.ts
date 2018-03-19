@@ -1,5 +1,5 @@
 import { PipelineRunner } from "solid-pipelines";
-import { ChainCourseSenderArguments } from './courseSenderArguments'
+import { ChainCourseSenderArguments } from './ChainCourseSenderArguments'
 import { CheckUserAuthorized } from './processors/checkUserAuthorized'
 import { PushCardToTrello } from './processors/pushCardToTrello'
 

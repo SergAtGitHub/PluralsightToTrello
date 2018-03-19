@@ -10,10 +10,6 @@ export class BaseMessageListener implements IMessageListener {
 
         if (args.message.isSome() && this.message === args.message.unwrap().action) {
             await runner.RunProcessors(this.processors, args);
-
-            if (args.sendResponse.isSome() && args.response.isSome()) {
-                args.sendResponse.unwrap()(args.response.unwrap());
-            }
         }
     }
 
