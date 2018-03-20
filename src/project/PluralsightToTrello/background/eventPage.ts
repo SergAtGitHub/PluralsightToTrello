@@ -1,4 +1,4 @@
-import { SendCourseMessageListener } from "../..";
+import { SendCourseMessageListener } from "../../../feature";
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action == "show") {

@@ -1,5 +1,5 @@
-import { BaseMessageListenerProcessor, MessageListenerArgs } from "../..";
-import { CourseParserArguments, ChainCourseParser } from "../CourseParser";
+import { BaseMessageListenerProcessor, MessageListenerArgs } from "../../../MessageListener";
+import { CourseParserArguments, ChainCourseParser } from "../../CourseParser";
 
 export class ParseCourseMessageProcessor extends BaseMessageListenerProcessor {
     async SafeExecute(args: MessageListenerArgs): Promise<void> {

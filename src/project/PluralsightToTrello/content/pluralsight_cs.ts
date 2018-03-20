@@ -1,4 +1,4 @@
-import { ParseCourseMessageListener } from "../..";
+import { ParseCourseMessageListener } from "../../../feature";
 
 chrome.runtime.onMessage.addListener(
     (message, sender, sendResponse) =>

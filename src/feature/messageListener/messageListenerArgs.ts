@@ -2,16 +2,15 @@ import * as Monads from '../../foundation'
 import { PipelineContext } from 'solid-pipelines';
 
 export class MessageListenerArgs extends PipelineContext {
-    public static from(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): MessageListenerArgs {
-        return new MessageListenerArgs(message, sender, sendResponse);
+    public static from(message: any, sender: chrome.runtime.MessageSender): MessageListenerArgs {
+        return new MessageListenerArgs(message, sender);
     }
 
-    private constructor(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void) {
+    private constructor(message: any, sender: chrome.runtime.MessageSender) {
         super();
 
         this.message = Monads.Some.wrapNull(message);
         this.sender = Monads.Some.wrapNull(sender);
-        this.sendResponse = Monads.Some.wrapNull(sendResponse);
     }
 
     readonly message: Monads.Option<any>;

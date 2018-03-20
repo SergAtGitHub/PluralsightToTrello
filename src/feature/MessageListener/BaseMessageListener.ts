@@ -14,7 +14,7 @@ export class BaseMessageListener implements IMessageListener {
     }
 
     onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
-        var args: MessageListenerArgs = MessageListenerArgs.from(message, sender, sendResponse);
+        var args: MessageListenerArgs = MessageListenerArgs.from(message, sender);
         this.process(args);
     }
 }
