@@ -1,5 +1,7 @@
-import { BaseMessageListenerProcessor, MessageListenerArgs, CourseModel, CardMapper, CheckListItemMapper } from "../..";
+import { CardMapper, CheckListItemMapper } from "../../PluralsightToTrelloModelsMapper";
+import { BaseMessageListenerProcessor, MessageListenerArgs } from "../../../foundation"
 import { ChainCourseSender, ChainCourseSenderArguments } from "../CourseSender";
+import { CourseModel } from "../../ParsePluralsightCourse/Models";
 
 export class SendCourseMessageProcessor extends BaseMessageListenerProcessor {
     async SafeExecute(args: MessageListenerArgs): Promise<void> {

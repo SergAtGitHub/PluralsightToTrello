@@ -1,4 +1,4 @@
-import { BaseMessageListener } from "../../MessageListener/BaseMessageListener";
+import { BaseMessageListener } from "../../../foundation";
 import { SendCourseMessageProcessor } from './SendCourseMessageProcessor'
 
 export class SendCourseMessageListener extends BaseMessageListener {

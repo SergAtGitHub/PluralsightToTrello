@@ -1,4 +1,4 @@
-import { BaseMessageListenerProcessor, MessageListenerArgs } from "../../../MessageListener";
+import { BaseMessageListenerProcessor, MessageListenerArgs } from "../../../../foundation";
 import { CourseParserArguments, ChainCourseParser } from "../../CourseParser";
 
 export class ParseCourseMessageProcessor extends BaseMessageListenerProcessor {

@@ -1,4 +1,4 @@
-import { BaseMessageListenerProcessor, MessageListenerArgs } from "../../../MessageListener";
+import { BaseMessageListenerProcessor, MessageListenerArgs } from "../../../../foundation";
 import { CourseParserArguments, ChainCourseParser } from "../../CourseParser";
 import { SendCourseMessageListener } from "../../../SendCourseToTrello";
 

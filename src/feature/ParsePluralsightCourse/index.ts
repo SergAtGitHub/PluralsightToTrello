@@ -1,3 +1,3 @@
 export * from './CourseParser'
-export * from './MessageListener'
 export * from './Models'
+export * from './MessageListener'

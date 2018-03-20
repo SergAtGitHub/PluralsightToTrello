@@ -1,4 +1,4 @@
-import { BaseMessageListener } from "../../index";
+import { BaseMessageListenerProcessor, MessageListenerArgs, BaseMessageListener } from "../../../foundation";
 import { ParseCourseMessageProcessor, SendNotificationToCourseSender } from './processors'
 
 export class ParseCourseMessageListener extends BaseMessageListener {
