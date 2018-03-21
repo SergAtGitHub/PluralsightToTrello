@@ -5,9 +5,9 @@ import { Result } from '../../../foundation';
 export class TrelloBoardRepository {
     public static Instance:TrelloBoardRepository = new TrelloBoardRepository();
 
-    getTrelloBoards(args: GetTrelloBoardArguments): Result<TrelloBoardsCollectionApiReturnResult, string> {
+    async getTrelloBoards(args: GetTrelloBoardArguments): Promise<Result<TrelloBoardsCollectionApiReturnResult, string>> {
         var runner:PipelineRunner = new PipelineRunner();
-        runner.RunProcessor(new TryToRetrieveBoard(), args);
+        await runner.RunProcessor(new TryToRetrieveBoard(), args);
 
         return args.Result.okOr(args.GetMessages(MessageFilter.All).join('\n'));
     }

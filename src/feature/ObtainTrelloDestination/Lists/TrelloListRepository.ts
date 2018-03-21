@@ -5,14 +5,14 @@ import { Result } from "../..";
 export class TrelloListRepository {
     public static Instance:TrelloListRepository = new TrelloListRepository();
 
-    getTrelloListsByBoard(boardId: string): Result<TrelloListsCollectionApiReturnResult, string> {
+    getTrelloListsByBoard(boardId: string): Promise<Result<TrelloListsCollectionApiReturnResult, string>> {
         var args = new GetTrelloListArguments(boardId);
         return this.getTrelloLists(args);
     }
 
-    getTrelloLists(args: GetTrelloListArguments): Result<TrelloListsCollectionApiReturnResult, string> {
+    async getTrelloLists(args: GetTrelloListArguments): Promise<Result<TrelloListsCollectionApiReturnResult, string>> {
         var runner:PipelineRunner = new PipelineRunner();
-        runner.RunProcessor(new TryToRetrieveList(), args);
+        await runner.RunProcessor(new TryToRetrieveList(), args);
 
         return args.Result.okOr(args.GetMessages(MessageFilter.All).join('\n'));
     }

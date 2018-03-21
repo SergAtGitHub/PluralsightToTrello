@@ -5,7 +5,7 @@ import { TrelloBoardApiReturnResult, Some } from '../..'
 
 export class TryToRetrieveBoard extends GetTrelloBoardProcessor {
     async SafeExecute(args: GetTrelloBoardArguments): Promise<void> {
-        var result = Trello.get(`/member/me/boards`,
+        var result = await Trello.get(`/member/me/boards`,
             (response) => this.success(args, response),
             (response) => this.error(args, response));
     }

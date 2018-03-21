@@ -1,69 +1,76 @@
 /// <reference path="../../../foundation/TrelloApi/client.d.ts" />
-import {  
-    GetTrelloBoardArguments, 
-    TrelloBoardRepository, 
-    GetTrelloListArguments, 
+import {
+    GetTrelloBoardArguments,
+    TrelloBoardRepository,
+    GetTrelloListArguments,
     TrelloListRepository,
     CourseModel,
-    ParseCourseMessageListener
+    ParseCourseMessageListener,
+    CommandPipelineArguments,
+    Result,
+    Ok,
+    Err
 } from "../../../feature";
+import { PipelineRunner, IPipeline, IProcessor, PipelineContext, SafeProcessor } from "solid-pipelines";
+import { PopupComponent } from './PopupComponent/PopupComponent'
 
-$(function () {
+document.addEventListener("DOMContentLoaded", () => InitializePopup.Instance.initialize());
 
-    Trello.authorize({});
-    if (Trello.authorized()) {
-        var getTrelloBoardsArgs = new GetTrelloBoardArguments();
-        TrelloBoardRepository.Instance.getTrelloBoards(getTrelloBoardsArgs);
-        setTimeout(() => {
-            var s = $('<select id="selectedBoard" />');
-            var boards = getTrelloBoardsArgs.Result.unwrap().Boards;
+class InitializePopup {
+    public static readonly Instance = new InitializePopup();
 
-            for (let board of boards) {
-                $('<option />', { value: board.id, text: board.name }).appendTo(s);
-            }
+    public async initialize() : Promise<void> {
+        var pipelineRunner = new PipelineRunner();
+        var args = new InitializePopupArguments();
 
-            s.appendTo('body');
-
-            s = $('<select id="selectedList" />');
-            s.appendTo('body');
-
-            $('#selectedBoard').change(function (e) {
-                e.preventDefault();
-
-                var args = new GetTrelloListArguments($("#selectedBoard").val().toString());
-                TrelloListRepository.Instance.getTrelloLists(args);
-                setTimeout(() => {
-                    var s = $('#selectedList');
-                    s.empty();
-                    var lists = args.Result.unwrap().lists;
-                    for (let list of lists) {
-                        $('<option />', { value: list.id, text: list.name }).appendTo(s);
-                    }
-
-                }, 2000);
-            });
-
-        }, 2000);
-
-    } else {
-        var el = $('<input id="openOptions" type="submit" value="Open options" />');
-        $("body").append(el);
+        pipelineRunner.RunPipeline(InitializePopupPipeline.Instance, args);
     }
+}
 
-    $('#openOptions').click(function (e) {
-        e.preventDefault();
-        chrome.runtime.openOptionsPage();
-    });
+class InitializePopupPipeline implements IPipeline {
+    public static readonly Instance = new InitializePopupPipeline();
+    GetProcessors(): IProcessor[] {
+        return [
+            ReauthOnLoad.Instance,
+            BuildPopupComponent.Instance,
+            FillInComponents.Instance
+        ];
+    }
+}
 
-    var el = $('<input id="parseCourse" type="submit" value="Parse course" />');
-    $("body").append(el);
+abstract class InitializePopupProcessor extends SafeProcessor<InitializePopupArguments> {}
 
+class InitializePopupArguments extends CommandPipelineArguments {
+}
 
-    $('#parseCourse').click(function (e) {
-        e.preventDefault();
+class ReauthOnLoad extends InitializePopupProcessor {
+    public static readonly Instance = new ReauthOnLoad();
 
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, { action: ParseCourseMessageListener.Message }, _ => console.log("Started course parsing"));
-        });
-    });
-});
+    async SafeExecute(args: InitializePopupArguments): Promise<void> {
+        Trello.authorize({});
+    }
+}
+
+class BuildPopupComponent extends InitializePopupProcessor {
+    public static readonly Instance = new BuildPopupComponent();
+
+    async SafeExecute(args: InitializePopupArguments): Promise<void> {
+        await PopupComponent.Instance.build("root");
+    }
+}
+
+class FillInComponents extends InitializePopupProcessor {
+    public static readonly Instance = new FillInComponents();
+
+    async SafeExecute(args: InitializePopupArguments): Promise<void> {
+        var getTrelloBoardsArgs = new GetTrelloBoardArguments();
+        var result = await TrelloBoardRepository.Instance.getTrelloBoards(getTrelloBoardsArgs);
+        var boards = getTrelloBoardsArgs.Result.unwrap().Boards;
+    
+        for (let board of boards) {
+            let opt: HTMLOptionElement = <HTMLOptionElement>(document.createElement('option'));
+            [opt.value, opt.text] = [board.id, board.name];
+            document.getElementById("selectedBoard").appendChild(opt);
+        }
+    }
+}

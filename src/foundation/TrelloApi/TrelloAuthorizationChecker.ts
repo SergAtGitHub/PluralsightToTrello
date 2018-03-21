@@ -1,5 +1,5 @@
-/// <reference path="../../../foundation/TrelloApi/client.d.ts" />
-import { Result, Ok } from "../../../foundation";
+/// <reference path="./client.d.ts" />
+import { Result, Ok } from "..";
 
 export interface ITrelloAuthorizationChecker {
     isAuthorized(): Result<boolean, string>;
