@@ -5,10 +5,12 @@ export class BuildPagePipeline implements IPipeline {
     GetProcessors(): IProcessor[] {
         return [
             Processors.EnsureTrelloAuthChecker.Instance,
+            Processors.AuthorizationCheck.Instance,
             Processors.BuildAuthorizationControl.Instance,
             Processors.BuildDestinationComboboxes.Instance,
             Processors.BuildParseCourseButton.Instance,
-            Processors.AppendPopupComponentIntoRoot.Instance
+            Processors.AppendControlsWhenAuthorizedToTrello.Instance,
+            Processors.AppendControlsWhenNotAuthorizedToTrello.Instance
         ];
     }
     public static readonly Instance = new BuildPagePipeline();

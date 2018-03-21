@@ -1,8 +1,8 @@
 import { PopupBuilderProcessor } from "../PopupBuilderProcessor";
 import { PopupBuilderArguments } from "../PopupBuilderArguments";
 
-export class AppendPopupComponentIntoRoot extends PopupBuilderProcessor {
-    public static readonly Instance = new AppendPopupComponentIntoRoot();
+export class AppendControlsWhenAuthorizedToTrello extends PopupBuilderProcessor {
+    public static readonly Instance = new AppendControlsWhenAuthorizedToTrello();
 
     async SafeExecute(args: PopupBuilderArguments): Promise<void> {
         let root = args.Root;
@@ -26,10 +26,10 @@ export class AppendPopupComponentIntoRoot extends PopupBuilderProcessor {
         else {
             root.appendChild(args.NonAuthorizedControl);
         }
-
+        
     }
 
     SafeCondition(args: PopupBuilderArguments): boolean {
-        return super.SafeCondition(args) && !!args.Root && !!args.TrelloAuthChecker;
+        return super.SafeCondition(args) && !!args.Root && args.UserIsAuthorized;
     }
 }
