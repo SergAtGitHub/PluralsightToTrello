@@ -11,11 +11,9 @@ export class TryParseCourseModelFromSender extends SendCourseMessageListenerProc
             return;
         }
 
-        console.log(message);
         let model = message.unwrap().model;
         if (!model) {
             args.AbortPipelineWithErrorMessage("Sent model was not of expected type, try to review it.");
-            console.log(model);
             return;
         }
 

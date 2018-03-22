@@ -1,6 +1,6 @@
 import {CourseSenderProcessor} from '../courseSenderProcessor'
 import { ChainCourseSenderArguments } from '../ChainCourseSenderArguments';
-import { Result } from '../../../../foundation/monads/result';
+import { Result } from '../../../../foundation/monads';
 
 export class CheckUserAuthorized extends CourseSenderProcessor {
     async SafeExecute(args: ChainCourseSenderArguments): Promise<void> {

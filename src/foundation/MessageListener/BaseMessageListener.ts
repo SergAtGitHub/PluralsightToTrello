@@ -1,24 +1,18 @@
 import { IMessageListener, BaseMessageListenerProcessor, MessageListenerArgs } from './index';
-import { PipelineRunner } from 'solid-pipelines';
+import { PipelineRunner, IProcessor } from 'solid-pipelines';
+import { PostprocessingLogging, PreprocessingLogging } from './processors'
 
 export class BaseMessageListener implements IMessageListener {
-    constructor(public message: string, public processors: BaseMessageListenerProcessor[]) {
+    constructor(public message: string, public processors: IProcessor[]) {
+        this.processors.push(PostprocessingLogging.Instance);
+        this.processors.unshift(PreprocessingLogging.Instance);
     }
 
     async process(args: MessageListenerArgs): Promise<void> {
         var runner: PipelineRunner = new PipelineRunner();
 
         if (args.message.isSome() && this.message === args.message.unwrap().action) {
-            console.log(`Started action: ${this.message}`);
-
             await runner.RunProcessors(this.processors, args);
-
-            if (args.hasProblems()) {
-                console.log(args.message);
-            }
-            else {
-                console.log(`Ended action: ${this.message}`);
-            }
         }
     }
 

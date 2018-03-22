@@ -1,6 +1,7 @@
 import { BaseMessageListener } from "../../../foundation";
 import * as Processors from './processors'
 import { SendCourseMessageListenerArguments } from './SendCourseMessageListenerArguments'
+import { SendCourseMessageListenerPipeline } from './SendCourseMessageListenerPipeline'
 
 export class SendCourseMessageListener extends BaseMessageListener {
     public static readonly Message = "sendCourse";
@@ -8,9 +9,7 @@ export class SendCourseMessageListener extends BaseMessageListener {
     public static Instance: SendCourseMessageListener
         = new SendCourseMessageListener(
             SendCourseMessageListener.Message,
-            [
-                Processors.SendCourseMessageProcessor.Instance
-            ]
+            SendCourseMessageListenerPipeline.Instance.GetProcessors()
         );
 
     onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
