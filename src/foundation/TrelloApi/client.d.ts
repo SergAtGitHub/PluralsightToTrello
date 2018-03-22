@@ -11,4 +11,5 @@ declare var Trello: {
     deauthorize: () => void;
     authorize: (userOpts: any) => Function;
     addCard: (options: any, next: any) => any;
+    updateTokenFromStorage: () => void;
 };

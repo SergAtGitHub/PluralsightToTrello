@@ -16,4 +16,10 @@ export class FillInComponents extends InitializePopupProcessor {
             document.getElementById("selectedBoard").appendChild(opt);
         }
     }
+
+    SafeCondition(args: InitializePopupArguments) : boolean {
+        return super.SafeCondition(args) 
+            && args.UserIsAuthorized;
+
+    }
 }

@@ -6,6 +6,5 @@ export class PopupBuilderArguments extends CommandPipelineArguments {
     Boards: HTMLSelectElement;
     Lists: HTMLSelectElement;
     NonAuthorizedControl: HTMLElement;
-    TrelloAuthChecker: ITrelloAuthorizationChecker;
     UserIsAuthorized: boolean;
 }

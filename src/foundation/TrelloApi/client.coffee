@@ -71,6 +71,12 @@ wrapper = (window, jQuery, opts) ->
       writeStorage("token", token)
       return
 
+    updateTokenFromStorage: ->
+      regexToken = /[&#]?token=([0-9a-f]{64})/
+      token ?= readStorage("token")
+      token ?= regexToken.exec(location.hash)?[1]
+
+
     # Request a token that will allow us to make API requests on a user's behalf
     #
     # opts =
@@ -93,16 +99,13 @@ wrapper = (window, jQuery, opts) ->
         expiration: "30days"
       , userOpts
 
-      regexToken = /[&#]?token=([0-9a-f]{64})/
 
       persistToken = ->
         if opts.persist && token?
           writeStorage("token", token)
 
       if opts.persist
-        token ?= readStorage("token")
-
-      token ?= regexToken.exec(location.hash)?[1]
+        @updateTokenFromStorage()
 
       if @authorized()
         persistToken()

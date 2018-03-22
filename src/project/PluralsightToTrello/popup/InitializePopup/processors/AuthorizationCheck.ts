@@ -1,10 +1,10 @@
-import { PopupBuilderProcessor } from "../PopupBuilderProcessor";
-import { PopupBuilderArguments } from "../PopupBuilderArguments";
+import { InitializePopupProcessor } from "../InitializePopupProcessor";
+import { InitializePopupArguments } from "../InitializePopupArguments";
 
-export class AuthorizationCheck extends PopupBuilderProcessor {
+export class AuthorizationCheck extends InitializePopupProcessor {
     public static readonly Instance = new AuthorizationCheck();
 
-    async SafeExecute(args: PopupBuilderArguments): Promise<void> {
+    async SafeExecute(args: InitializePopupArguments): Promise<void> {
         if (!args.TrelloAuthChecker) {
             args.AbortPipelineWithErrorMessage("You've missed an authorization checker, please, review the popup component builder.");
             return;
@@ -18,7 +18,7 @@ export class AuthorizationCheck extends PopupBuilderProcessor {
         args.UserIsAuthorized = getAuthorizationResult.unwrap();
     }
 
-    SafeCondition(args: PopupBuilderArguments): boolean {
+    SafeCondition(args: InitializePopupArguments): boolean {
         return super.SafeCondition(args);
     }
 }

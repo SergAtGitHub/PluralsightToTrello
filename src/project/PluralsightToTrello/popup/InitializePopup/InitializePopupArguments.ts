@@ -1,4 +1,6 @@
-import { CommandPipelineArguments } from '../../../../foundation'
+import { CommandPipelineArguments, ITrelloAuthorizationChecker } from '../../../../foundation'
 
 export class InitializePopupArguments extends CommandPipelineArguments {
+    TrelloAuthChecker:ITrelloAuthorizationChecker;
+    UserIsAuthorized: boolean;
 }

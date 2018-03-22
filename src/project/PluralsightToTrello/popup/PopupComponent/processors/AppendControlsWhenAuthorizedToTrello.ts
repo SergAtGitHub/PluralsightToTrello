@@ -7,7 +7,7 @@ export class AppendControlsWhenAuthorizedToTrello extends PopupBuilderProcessor 
     async SafeExecute(args: PopupBuilderArguments): Promise<void> {
         let root = args.Root;
 
-        if (args.TrelloAuthChecker.isAuthorized()) {
+        if (args.UserIsAuthorized) {
             if (!args.Boards) {
                 args.AddError("Couldn't build boards combobox.");
             }
@@ -30,6 +30,6 @@ export class AppendControlsWhenAuthorizedToTrello extends PopupBuilderProcessor 
     }
 
     SafeCondition(args: PopupBuilderArguments): boolean {
-        return super.SafeCondition(args) && !!args.Root && args.UserIsAuthorized;
+        return super.SafeCondition(args) && !!args.Root;
     }
 }
