@@ -1,5 +1,5 @@
 import { BaseMessageListenerProcessor, MessageListenerArgs, BaseMessageListener } from "../../../foundation";
-import { ParseCourseMessageProcessor, SendNotificationToCourseSender } from './processors'
+import * as Processors from './processors'
 
 export class ParseCourseMessageListener extends BaseMessageListener {
     public static readonly Message = "parseCourse";
@@ -8,8 +8,8 @@ export class ParseCourseMessageListener extends BaseMessageListener {
         = new ParseCourseMessageListener(
             ParseCourseMessageListener.Message,
             [
-                new ParseCourseMessageProcessor(),
-                new SendNotificationToCourseSender()
+                Processors.ParseCourseMessageProcessor.Instance,
+                Processors.SendNotificationToCourseSender.Instance
             ]
         );
 }

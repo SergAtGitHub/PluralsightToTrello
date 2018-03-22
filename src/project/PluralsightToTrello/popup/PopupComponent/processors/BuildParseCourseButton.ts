@@ -7,16 +7,25 @@ export class BuildParseCourseButton extends PopupBuilderProcessor {
 
     async SafeExecute(args: PopupBuilderArguments): Promise<void> {
         var parseCourse = <HTMLButtonElement>document.createElement("button");
-        parseCourse.onclick = function (e) {
-            e.preventDefault();
-
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { action: ParseCourseMessageListener.Message }, _ => console.log("Started course parsing"));
-            });
-        };
+        parseCourse.onclick = this.ParseCourseButtonClicked;
         parseCourse.textContent = "Parse course";
         parseCourse.id = "parseCourse";
         args.ParseCourseButton = parseCourse;
+    }
+
+    public ParseCourseButtonClicked(eventArgs: MouseEvent){
+        eventArgs.preventDefault();
+
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(
+                tabs[0].id, 
+                { 
+                    action: ParseCourseMessageListener.Message,
+                    list: (<HTMLSelectElement>document.getElementById("selectedList")).selectedOptions[0].value
+                }, 
+                _ => console.log("Started course parsing")
+            );
+        });
     }
 
     SafeCondition(args: PopupBuilderArguments): boolean {

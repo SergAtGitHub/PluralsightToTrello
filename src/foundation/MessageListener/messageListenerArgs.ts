@@ -7,7 +7,7 @@ export class MessageListenerArgs extends QueryPipelineArguments<any> {
         return new MessageListenerArgs(message, sender);
     }
 
-    private constructor(message: any, sender: chrome.runtime.MessageSender) {
+    protected constructor(message: any, sender: chrome.runtime.MessageSender) {
         super();
 
         this.message = Monads.Some.wrapNull(message);

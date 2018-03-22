@@ -1,2 +1,2 @@
 export * from './SendCourseMessageListener'
-export * from './SendCourseMessageProcessor'
+export * from './SendCourseMessageListenerArguments'
