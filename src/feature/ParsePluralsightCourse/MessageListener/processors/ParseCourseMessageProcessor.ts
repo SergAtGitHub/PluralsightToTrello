@@ -5,6 +5,6 @@ export class ParseCourseMessageProcessor extends BaseMessageListenerProcessor {
     async SafeExecute(args: MessageListenerArgs): Promise<void> {
         var parseArguments: CourseParserArguments = new CourseParserArguments();
         await ChainCourseParser.Instance.process(parseArguments);
-        args.response = parseArguments.Result;
+        args.Result = parseArguments.Result;
     }
 }

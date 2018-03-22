@@ -1,7 +1,8 @@
 import * as Monads from '../../foundation'
 import { PipelineContext } from 'solid-pipelines';
+import { QueryPipelineArguments } from '../../foundation';
 
-export class MessageListenerArgs extends PipelineContext {
+export class MessageListenerArgs extends QueryPipelineArguments<any> {
     public static from(message: any, sender: chrome.runtime.MessageSender): MessageListenerArgs {
         return new MessageListenerArgs(message, sender);
     }
@@ -15,7 +16,4 @@ export class MessageListenerArgs extends PipelineContext {
 
     readonly message: Monads.Option<any>;
     readonly sender: Monads.Option<chrome.runtime.MessageSender>;
-    readonly sendResponse: Monads.Option<(response: any) => void>;
-
-    response: Monads.Option<any>;
 }

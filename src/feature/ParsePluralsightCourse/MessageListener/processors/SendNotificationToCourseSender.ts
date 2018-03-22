@@ -7,11 +7,11 @@ export class SendNotificationToCourseSender extends BaseMessageListenerProcessor
         chrome.runtime.sendMessage(
             { 
                 action: SendCourseMessageListener.Message, 
-                model : args.response.unwrap() 
+                model : args.Result.unwrap() 
             }, r => console.log("Course sending is started"));
     }
 
     SafeCondition(args: MessageListenerArgs) : boolean {
-        return super.SafeCondition(args) && args.response.isSome();
+        return super.SafeCondition(args) && args.Result.isSome();
     }
 }
