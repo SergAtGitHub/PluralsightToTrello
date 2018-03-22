@@ -10,6 +10,7 @@
     },
     "background": {
         "scripts": [
+            "./js/trello.js",
             "./js/background.js"
         ],
         "persistent": false

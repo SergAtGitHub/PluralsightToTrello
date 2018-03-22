@@ -3,6 +3,8 @@ import { ChainCourseSenderArguments } from '../ChainCourseSenderArguments';
 import { Result } from '../../../../foundation/monads';
 
 export class CheckUserAuthorized extends CourseSenderProcessor {
+    public static readonly Instance = new CheckUserAuthorized();
+
     async SafeExecute(args: ChainCourseSenderArguments): Promise<void> {
         var authorizationResult: Result<boolean, string> = args.AuthorizationChecker.unwrap().isAuthorized();
         if (authorizationResult.isErr()) {

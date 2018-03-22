@@ -291,5 +291,9 @@ opts =
   authEndpoint:"https://trello.com"
   intentEndpoint:"https://trello.com"
   key:"bc80563c853c5fa76d4b271b77bcb23c"
+  scope: 
+    read: true
+    write: true
+    account: false
 
 wrapper(window, jQuery, opts)

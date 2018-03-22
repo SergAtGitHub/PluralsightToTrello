@@ -4,6 +4,7 @@ import { ChainCourseSenderArguments } from "../ChainCourseSenderArguments";
 import { ChecklistModel, VerticalPosition } from "../../../../foundation";
 
 export class PushCardToTrello extends CourseSenderProcessor {
+    public static readonly Instance = new PushCardToTrello();
 
     async SafeExecute(args: ChainCourseSenderArguments): Promise<void> {
         var successCard = function (cardData) {
