@@ -1,5 +1,6 @@
 import { PipelineRunner } from 'solid-pipelines';
-import { Processors, CourseParserArguments } from '.'
+import { CourseParserArguments } from './courseParserArguments'
+import { CourseParserPipeline } from './CourseParserPipeline'
 
 export class ChainCourseParser {
     public static Instance: ChainCourseParser = new ChainCourseParser();
@@ -7,13 +8,6 @@ export class ChainCourseParser {
     public process(args: CourseParserArguments): Promise<void> {
         var runner: PipelineRunner = new PipelineRunner();
 
-        return runner.RunProcessors(
-            [
-                new Processors.InitializeResult(),
-                new Processors.GetCourseTitle(),
-                new Processors.GetCourseDuration(),
-                new Processors.GetCourseLink(),
-                new Processors.AddSections()
-            ], args);
+        return runner.RunPipeline(CourseParserPipeline.Instance, args);
     }
 }

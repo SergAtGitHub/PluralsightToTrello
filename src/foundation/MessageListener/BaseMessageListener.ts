@@ -9,6 +9,7 @@ export class BaseMessageListener implements IMessageListener {
         var runner:PipelineRunner = new PipelineRunner();
 
         if (args.message.isSome() && this.message === args.message.unwrap().action) {
+            console.log(`Started action: ${this.message}`);
             await runner.RunProcessors(this.processors, args);
         }
     }
