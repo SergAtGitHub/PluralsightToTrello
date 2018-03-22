@@ -18,6 +18,7 @@ export class TrelloAuthorizationChecker implements ITrelloAuthorizationChecker {
     }
     
     public authorized(): boolean {
-        return this.isAuthorized().isOk();
+        var authorizedMonad = this.isAuthorized();
+        return authorizedMonad.isOk() && authorizedMonad.unwrap();
     }
 }

@@ -6,7 +6,7 @@ export class CheckUserAuthorized extends CourseSenderProcessor {
     public static readonly Instance = new CheckUserAuthorized();
 
     async SafeExecute(args: ChainCourseSenderArguments): Promise<void> {
-        var authorizationResult: Result<boolean, string> = args.AuthorizationChecker.unwrap().isAuthorized();
+        var authorizationResult: Result<boolean, string> = args.AuthorizationChecker.isAuthorized();
         if (authorizationResult.isErr()) {
             args.AbortPipelineWithErrorMessage("There is an error occured during the authorization check. We still don't know whether user is authorized.");
             args.AddError(authorizationResult.err().unwrap());
@@ -20,8 +20,6 @@ export class CheckUserAuthorized extends CourseSenderProcessor {
     }
 
     SafeCondition(args: ChainCourseSenderArguments): boolean {
-        var safeToExecute = args.AuthorizationChecker.isSome();
-
-        return super.SafeCondition(args) && safeToExecute;
+        return super.SafeCondition(args) && !!args.AuthorizationChecker;
     }
 }

@@ -11,7 +11,7 @@ export class UpdateTrelloToken extends CourseSenderProcessor {
 
     SafeCondition(args: ChainCourseSenderArguments): boolean {
         return super.SafeCondition(args) 
-            && args.AuthorizationChecker.isSome() 
-            && !args.AuthorizationChecker.unwrap().authorized();
+            && !!args.AuthorizationChecker 
+            && !args.AuthorizationChecker.authorized();
     }
 }

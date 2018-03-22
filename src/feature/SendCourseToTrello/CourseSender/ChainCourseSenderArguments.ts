@@ -5,11 +5,11 @@ export class ChainCourseSenderArguments extends CommandPipelineArguments {
         var result: ChainCourseSenderArguments = new ChainCourseSenderArguments();
         result.Card = card;
         result.Sections = items;
-        result.AuthorizationChecker = Some.wrapNull(TrelloAuthorizationChecker.Instance);
+        result.AuthorizationChecker = TrelloAuthorizationChecker.Instance;
         return result;
     }
 
     Card: CardModel;
     Sections: ChecklistItemModel[];
-    AuthorizationChecker: Option<ITrelloAuthorizationChecker>;
+    AuthorizationChecker: ITrelloAuthorizationChecker;
 }

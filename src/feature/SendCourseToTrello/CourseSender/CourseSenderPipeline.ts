@@ -6,7 +6,8 @@ export class CourseSenderPipeline implements IPipeline {
 
     GetProcessors(): IProcessor[] {
         return [
-            Processors.UpdateTrelloToken.Instance
+            Processors.EnsureTrelloAuthChecker.Instance,
+            Processors.UpdateTrelloToken.Instance,
             Processors.CheckUserAuthorized.Instance,
             Processors.PushCardToTrello.Instance
         ];
