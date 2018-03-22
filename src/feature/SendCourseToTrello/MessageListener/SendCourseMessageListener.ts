@@ -1,5 +1,5 @@
 import { BaseMessageListener } from "../../../foundation";
-import { SendCourseMessageProcessor } from './processors/SendCourseMessageProcessor'
+import * as Processors from './processors'
 import { SendCourseMessageListenerArguments } from './SendCourseMessageListenerArguments'
 
 export class SendCourseMessageListener extends BaseMessageListener {
@@ -9,7 +9,7 @@ export class SendCourseMessageListener extends BaseMessageListener {
         = new SendCourseMessageListener(
             SendCourseMessageListener.Message,
             [
-                new SendCourseMessageProcessor()
+                Processors.SendCourseMessageProcessor.Instance
             ]
         );
 

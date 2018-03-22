@@ -1,4 +1,4 @@
-import {IMessageListener, BaseMessageListenerProcessor, MessageListenerArgs } from './index';
+import { IMessageListener, BaseMessageListenerProcessor, MessageListenerArgs } from './index';
 import { PipelineRunner } from 'solid-pipelines';
 
 export class BaseMessageListener implements IMessageListener {
@@ -6,11 +6,19 @@ export class BaseMessageListener implements IMessageListener {
     }
 
     async process(args: MessageListenerArgs): Promise<void> {
-        var runner:PipelineRunner = new PipelineRunner();
+        var runner: PipelineRunner = new PipelineRunner();
 
         if (args.message.isSome() && this.message === args.message.unwrap().action) {
             console.log(`Started action: ${this.message}`);
+
             await runner.RunProcessors(this.processors, args);
+
+            if (args.hasProblems()) {
+                console.log(args.message);
+            }
+            else {
+                console.log(`Ended action: ${this.message}`);
+            }
         }
     }
 
