@@ -7,7 +7,7 @@ export class CheckCachedData extends InitializePopupProcessor {
     public static readonly Instance = new CheckCachedData();
 
     async SafeExecute(args: InitializePopupArguments): Promise<void> {
-        args.BoardItems = TrelloDataCache.Instance.GetLastUsedBoards();
-        args.ListItems = TrelloDataCache.Instance.GetLastUsedLists();
+        args.BoardItems = args.TrelloDataCache.GetLastUsedBoards();
+        args.ListItems = args.TrelloDataCache.GetLastUsedLists();
     }
 }

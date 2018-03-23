@@ -13,7 +13,7 @@ export class FillInComponents extends InitializePopupProcessor {
 
         var cacheData = new TrelloBoardsCache();
         cacheData.boards = boards;
-        TrelloDataCache.Instance.SetLastUsedBoards(cacheData);
+        args.TrelloDataCache.SetLastUsedBoards(cacheData);
     
         for (let board of boards) {
             let opt: HTMLOptionElement = <HTMLOptionElement>(document.createElement('option'));
