@@ -12,7 +12,7 @@ export class TrelloItemsCreator {
 
         await runner.RunPipeline(TrelloItemsCreatorPipeline.Instance, args);
 
-        return args.Result.okOr(args.getConsoleMessage();
+        return args.Result.okOr(args.getConsoleMessage());
     }
 }
 

@@ -14,7 +14,7 @@ export class CreateChecklist extends TrelloItemsCreatorProcessor {
             idCard: args.Result.unwrap().cardId
         };
 
-        Trello.post(
+        await Trello.post(
             '/checklists',
             args.Checklist, 
             (cardData) => this.ChecklistSuccessfullyCreated(cardData, args), 

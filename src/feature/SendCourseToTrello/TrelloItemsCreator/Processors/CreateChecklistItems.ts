@@ -9,7 +9,7 @@ export class CreateChecklistItems extends TrelloItemsCreatorProcessor {
     async SafeExecute(args: TrelloItemsCreatorArguments): Promise<void> {
         var checklistId = args.Result.unwrap().checklistId;
         for (const section of args.Sections) {
-            Trello.post(
+            await Trello.post(
                 `/checklists/${checklistId}/checkItems`, 
                 section, 
                 (itemData) => this.ItemSuccessfullyCreated(itemData, args), 

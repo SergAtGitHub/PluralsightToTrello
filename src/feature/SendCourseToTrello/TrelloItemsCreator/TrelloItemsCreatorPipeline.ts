@@ -6,8 +6,10 @@ export class TrelloItemsCreatorPipeline implements IPipeline {
     
     GetProcessors(): IProcessor[] {
         return [
+            Processors.InitializeResult.Instance,
             Processors.CreateCard.Instance,
-            Processors.CreateChecklist.Instance
+            Processors.CreateChecklist.Instance,
+            Processors.CreateChecklistItems.Instance
         ];
     }
 }
