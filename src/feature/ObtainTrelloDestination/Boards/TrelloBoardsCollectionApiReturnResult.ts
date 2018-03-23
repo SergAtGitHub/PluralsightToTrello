@@ -1,5 +1,5 @@
-import { TrelloBoardApiReturnResult } from "../../../foundation";
+import { TrelloBoardDestinationModel } from '../Models'
 
 export class TrelloBoardsCollectionApiReturnResult {
-    Boards: TrelloBoardApiReturnResult[];
+    Boards: TrelloBoardDestinationModel[];
 }

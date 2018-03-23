@@ -1,5 +1,5 @@
-import { TrelloListApiReturnResult } from ".";
+import { TrelloListDestinationModel } from '../Models'
 
 export class TrelloListsCollectionApiReturnResult {
-    lists: TrelloListApiReturnResult[];
+    lists: TrelloListDestinationModel[];
 }

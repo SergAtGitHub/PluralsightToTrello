@@ -7,7 +7,9 @@ export class InitializePopupPipeline implements IPipeline {
         return [
             Processors.ReauthOnLoad.Instance,
             Processors.EnsureTrelloAuthChecker.Instance,
+            Processors.EnsureTrelloDataCache.Instance,
             Processors.AuthorizationCheck.Instance,
+            Processors.CheckCachedData.Instance,
             Processors.BuildPopupComponent.Instance,
             Processors.FillInComponents.Instance
         ];
