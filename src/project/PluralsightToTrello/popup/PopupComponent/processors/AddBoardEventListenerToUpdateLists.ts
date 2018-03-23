@@ -6,7 +6,7 @@ export class AddBoardEventListenerToUpdateLists extends PopupBuilderProcessor {
     public static readonly Instance = new AddBoardEventListenerToUpdateLists();
 
     async SafeExecute(args: PopupBuilderArguments): Promise<void> {
-        args.Boards.addEventListener("onchange", async e => await this.OnBoardChanged(e, args.Boards, args.Lists));
+        args.Boards.addEventListener("change", async e => await this.OnBoardChanged(e, args.Boards, args.Lists));
     }
 
     async OnBoardChanged(event: Event, selectedBoard : HTMLSelectElement, selectedList: HTMLSelectElement) : Promise<void> {
