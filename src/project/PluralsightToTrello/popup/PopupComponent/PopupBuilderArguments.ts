@@ -1,5 +1,5 @@
 import { CommandPipelineArguments, ITrelloAuthorizationChecker, Option } from "../../../../foundation";
-import { TrelloBoardsCache, TrelloListsCache } from "../../../../feature/TrelloDataCache";
+import { TrelloBoardsCache, TrelloListsCache, TrelloDataCache } from "../../../../feature/TrelloDataCache";
 
 export class PopupBuilderArguments extends CommandPipelineArguments {
     Root: HTMLElement;
@@ -10,4 +10,5 @@ export class PopupBuilderArguments extends CommandPipelineArguments {
     UserIsAuthorized: boolean;
     CachedBoards: Option<TrelloBoardsCache>;
     CachedLists: Option<TrelloListsCache>;
+    Cache: TrelloDataCache;
 }

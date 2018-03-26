@@ -24,10 +24,36 @@ export class TrelloDataCache {
         });
     }
 
-    SetLastUsedLists(cacheData: TrelloListsCache) {
+    async SetLastUsedLists(cacheData: TrelloListsCache) : Promise<void> {
         var jsonVariable = {};
         jsonVariable[TrelloListsCache.Key] = cacheData;
         chrome.storage.sync.set(jsonVariable);
+    }
+
+    async SetLastSelectedList(listId: string) : Promise<void> {
+        let lastCache = await this.GetLastUsedLists();
+        if (lastCache.isNone()){
+            return;
+        }
+
+        let cacheData = lastCache.unwrap();
+        if (cacheData.lists.some((value) => value.id === listId)) {
+            cacheData.lastUsedList = listId;
+            this.SetLastUsedLists(cacheData);
+        }
+    }
+
+    async SetLastSelectedBoard(boardId: string) : Promise<void> {
+        let lastCache = await this.GetLastUsedBoards();
+        if (lastCache.isNone()){
+            return;
+        }
+
+        let cacheData = lastCache.unwrap();
+        if (cacheData.boards.some((value) => value.id === boardId)) {
+            cacheData.lastUsedBoard = boardId;
+            this.SetLastUsedBoards(cacheData);
+        }
     }
 
     async GetLastUsedBoards(): Promise<Option<TrelloBoardsCache>> {
@@ -35,7 +61,7 @@ export class TrelloDataCache {
             await this.GetFromChromeCache(TrelloBoardsCache.Key));
     }
 
-    SetLastUsedBoards(cacheData: TrelloBoardsCache) {
+    async SetLastUsedBoards(cacheData: TrelloBoardsCache) : Promise<void> {
         var jsonVariable = {};
         jsonVariable[TrelloBoardsCache.Key] = cacheData;
         chrome.storage.sync.set(jsonVariable);

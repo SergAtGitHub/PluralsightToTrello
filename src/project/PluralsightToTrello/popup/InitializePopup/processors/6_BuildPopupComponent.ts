@@ -13,6 +13,7 @@ export class BuildPopupComponent extends InitializePopupProcessor {
         popupBuilderArguments.UserIsAuthorized = args.UserIsAuthorized;
         popupBuilderArguments.CachedBoards = args.BoardItems;
         popupBuilderArguments.CachedLists = args.ListItems;
+        popupBuilderArguments.Cache = args.TrelloDataCache;
 
         await PopupComponent.Instance.buildWithArguments(popupBuilderArguments);
 

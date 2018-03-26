@@ -12,7 +12,8 @@ export class BuildPagePipeline implements IPipeline {
             Processors.BuildParseCourseButton.Instance,
             Processors.AppendControlsWhenAuthorizedToTrello.Instance,
             Processors.AppendControlsWhenNotAuthorizedToTrello.Instance,
-            Processors.AddBoardEventListenerToUpdateLists.Instance
+            Processors.AddBoardEventListenerToUpdateLists.Instance,
+            Processors.AddListsEventListenerToUpdateCache.Instance
         ];
     }
     public static readonly Instance = new BuildPagePipeline();

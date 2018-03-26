@@ -10,7 +10,7 @@ export class FillInListsCombobox extends PopupBuilderProcessor {
 
         for (let list of args.CachedLists.unwrap().lists) {
             let opt: HTMLOptionElement = <HTMLOptionElement>(document.createElement('option'));
-            [opt.value, opt.text, opt.selected] = [list.id, list.name, list.id === selectedId];
+            [opt.value, opt.text, opt.selected] = [list.id, list.name + ' [cached]', list.id === selectedId];
             
             args.Lists.appendChild(opt);
         }
