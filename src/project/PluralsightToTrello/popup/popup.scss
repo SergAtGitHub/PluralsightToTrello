@@ -1,3 +1,10 @@
+@charset "UTF-8";
+@import "milligram";
+
+body {
+  min-width:400px;
+}
+
 .button-black.button-outline {
     background-color: transparent;
     color: black;

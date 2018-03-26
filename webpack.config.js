@@ -38,9 +38,17 @@ module.exports = {
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
 					use: [{
-						loader: "css-loader"
+						loader: "css-loader",
+						options: {
+						  minimize: true || {/* CSSNano Options */}
+						}
 					}, {
-						loader: "sass-loader"
+						loader: "sass-loader",
+						options: {
+							includePaths: [
+								path.resolve("./node_modules/milligram/dist")
+							]
+						}
 					}],
 					// use style-loader in development
 					fallback: "style-loader"
@@ -61,6 +69,6 @@ module.exports = {
 		}),
 		new ExtractTextPlugin({
 			filename: '[name]'
-		  })
+		})
 	]
 }
