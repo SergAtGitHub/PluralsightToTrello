@@ -14,7 +14,6 @@ export class BackgroundLoggingEventListener extends BaseMessageListener {
 
     onMessage(message: any, sender: chrome.runtime.MessageSender, sendResponse: (response: any) => void): void {
         let logMessageArgs = new BackgroundLoggingArguments(message, sender);
-        logMessageArgs.AddInformation(message.text);
         this.process(logMessageArgs);
     }
     
