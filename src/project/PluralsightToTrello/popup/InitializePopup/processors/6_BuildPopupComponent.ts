@@ -11,7 +11,13 @@ export class BuildPopupComponent extends InitializePopupProcessor {
         var popupBuilderArguments = new PopupBuilderArguments();
         popupBuilderArguments.Root = document.getElementById("root");
         popupBuilderArguments.UserIsAuthorized = args.UserIsAuthorized;
+        popupBuilderArguments.CachedBoards = args.BoardItems;
+        popupBuilderArguments.CachedLists = args.ListItems;
+        popupBuilderArguments.Cache = args.TrelloDataCache;
 
         await PopupComponent.Instance.buildWithArguments(popupBuilderArguments);
+
+        args.BoardCombobox = popupBuilderArguments.Boards;
+        args.ListCombobox = popupBuilderArguments.Lists;
     }
 }

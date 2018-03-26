@@ -5,10 +5,14 @@ import { InitializePopupPipeline } from './InitializePopupPipeline'
 export class InitializePopup {
     public static readonly Instance = new InitializePopup();
 
-    public async initialize(): Promise<void> {
-        var pipelineRunner = new PipelineRunner();
+    public initialize(): Promise<void> {
         var args = new InitializePopupArguments();
+        return this.initializeWithArguments(args);
+    }
+    
+    public initializeWithArguments(args: InitializePopupArguments): Promise<void> {
+        var pipelineRunner = new PipelineRunner();
 
-        pipelineRunner.RunPipeline(InitializePopupPipeline.Instance, args);
+        return pipelineRunner.RunPipeline(InitializePopupPipeline.Instance, args);
     }
 }
