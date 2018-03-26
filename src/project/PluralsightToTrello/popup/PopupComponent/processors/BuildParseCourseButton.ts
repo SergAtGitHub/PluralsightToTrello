@@ -10,6 +10,7 @@ export class BuildParseCourseButton extends PopupBuilderProcessor {
         parseCourse.onclick = this.ParseCourseButtonClicked;
         parseCourse.textContent = "Parse course";
         parseCourse.id = "parseCourse";
+        parseCourse.className = "button button-outline";
         args.ParseCourseButton = parseCourse;
     }
 

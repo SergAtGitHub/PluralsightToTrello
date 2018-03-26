@@ -10,6 +10,7 @@ export class BuildAuthorizationControl extends PopupBuilderProcessor {
         el.id = "openOptions";
         el.textContent = "Authorize";
         el.onclick = this.OpenOptionsClicked;
+        el.className = "button button-outline";
         args.NonAuthorizedControl = el;
     }
 
