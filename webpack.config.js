@@ -2,6 +2,8 @@ var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var webpack = require('webpack');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
 	context: path.resolve('./src/'),
 	entry: {
@@ -33,16 +35,16 @@ module.exports = {
 				use: ['coffee-loader']
 			},
 			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
-			{
 				test: /\.scss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader']
+				use: ExtractTextPlugin.extract({
+					use: [{
+						loader: "css-loader"
+					}, {
+						loader: "sass-loader"
+					}],
+					// use style-loader in development
+					fallback: "style-loader"
+				})
 			}
 		]
 	},
@@ -56,6 +58,9 @@ module.exports = {
 			jQuery: 'jquery',
 			$: 'jquery',
 			jquery: 'jquery'
-		})
+		}),
+		new ExtractTextPlugin({
+			filename: '[name]'
+		  })
 	]
 }
