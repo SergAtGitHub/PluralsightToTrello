@@ -12,7 +12,7 @@ module.exports = {
 		trello: './foundation/TrelloApi/client.coffee'
 	},
 	resolve: {
-		extensions: [".js", ".ts", ".d.ts"]
+		extensions: [".min.js", ".js", ".ts", ".d.ts", ".min.css", ".css"]
 	},
 	output: {
 		path: path.resolve('build/dist'),
@@ -29,7 +29,11 @@ module.exports = {
 			{
 				test: /\.coffee$/,
 				use: ['coffee-loader']
-			}
+			},
+			{
+				test: /\.css$/,
+				use: [ 'style-loader', 'css-loader' ]
+			  }
 		]
 	},
 	plugins: [
