@@ -5,18 +5,20 @@ var webpack = require('webpack');
 module.exports = {
 	context: path.resolve('./src/'),
 	entry: {
-		popup: './project/PluralsightToTrello/popup/popup.ts',
-		content: './project/PluralsightToTrello/content/pluralsight_cs.ts',
-		options: './project/PluralsightToTrello/options/options.js',
-		background: './project/PluralsightToTrello/background/eventPage.ts',
-		trello: './foundation/TrelloApi/client.coffee'
+		'js/popup.js': './project/PluralsightToTrello/popup/popup.ts',
+		'js/content.js': './project/PluralsightToTrello/content/content.ts',
+		'js/options.js': './project/PluralsightToTrello/options/options.js',
+		'js/background.js': './project/PluralsightToTrello/background/background.ts',
+		'js/trello.js': './foundation/TrelloApi/client.coffee',
+
+		'css/popup.css': './project/PluralsightToTrello/popup/popup.scss'
 	},
 	resolve: {
-		extensions: [".min.js", ".js", ".ts", ".d.ts", ".min.css", ".css"]
+		extensions: [".min.js", ".js", ".ts", ".d.ts", ".min.css", "scss", ".css"]
 	},
 	output: {
 		path: path.resolve('build/dist'),
-		filename: "js/[name].js"
+		filename: "[name]"
 	},
 	module: {
 		rules: [
@@ -24,7 +26,7 @@ module.exports = {
 				test: /\.ts$/,
 				exclude: "/node_modules/",
 				loader: "ts-loader",
-				options: { configFile : "tsconfig.json" }
+				options: { configFile: "tsconfig.json" }
 			},
 			{
 				test: /\.coffee$/,
@@ -32,8 +34,16 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: [ 'style-loader', 'css-loader' ]
-			  }
+				use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.scss$/,
+				use: ['style-loader', 'css-loader', 'sass-loader']
+			}
 		]
 	},
 	plugins: [
