@@ -4,15 +4,24 @@ import { TrelloBoardDestinationModel, TrelloListDestinationModel } from '../Obta
 export class TrelloDataCache {
     public static readonly Instance = new TrelloDataCache();
 
-    GetLastUsedLists() : Option<TrelloListsCache> {
-        var result = new None<TrelloListsCache>();
-        
-        chrome.storage.sync.get(
-            [TrelloListsCache.Key], 
-            (items: { [key:string] : any }) => 
-                result = Some.wrapNull(items[TrelloListsCache.Key]));
+    async GetLastUsedLists(): Promise<Option<TrelloListsCache>> {
+        return Some.wrapNull(
+            await this.GetFromChromeCache(TrelloListsCache.Key));
+    }
 
-        return result;
+    protected GetFromChromeCache(cacheKey: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.get(
+                [cacheKey],
+                (items: { [key: string]: any }) => {
+                    let err = chrome.runtime.lastError;
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(items[cacheKey]);
+                    }
+                });
+        });
     }
 
     SetLastUsedLists(cacheData: TrelloListsCache) {
@@ -20,16 +29,10 @@ export class TrelloDataCache {
         jsonVariable[TrelloListsCache.Key] = cacheData;
         chrome.storage.sync.set(jsonVariable);
     }
-    
-    GetLastUsedBoards() : Option<TrelloBoardsCache> {
-        var result = new None<TrelloBoardsCache>();
-        
-        chrome.storage.sync.get(
-            [TrelloBoardsCache.Key], 
-            (items: { [key:string] : any }) => 
-                result = Some.wrapNull(items[TrelloBoardsCache.Key]));
 
-        return result;
+    async GetLastUsedBoards(): Promise<Option<TrelloBoardsCache>> {
+        return Some.wrapNull(
+            await this.GetFromChromeCache(TrelloBoardsCache.Key));
     }
 
     SetLastUsedBoards(cacheData: TrelloBoardsCache) {
