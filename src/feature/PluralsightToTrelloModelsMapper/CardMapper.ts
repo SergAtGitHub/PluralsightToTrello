@@ -1,4 +1,4 @@
-import { CourseModel } from "../ParsePluralsightCourse/models";
+import { CourseModel } from "../ParsePluralsightCourse/Models";
 import { Result, Ok, VerticalPosition, CardModel } from "../../foundation";
 
 export class CardMapper {

@@ -1,5 +1,5 @@
 import { PipelineRunner } from 'solid-pipelines';
-import { CourseParserArguments } from './courseParserArguments'
+import { CourseParserArguments } from './CourseParserArguments'
 import { CourseParserPipeline } from './CourseParserPipeline'
 
 export class ChainCourseParser {

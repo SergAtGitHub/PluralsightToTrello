@@ -1,5 +1,5 @@
 import { SafeProcessor } from 'solid-pipelines'
-import { CourseParserArguments } from './courseParserArguments'
+import { CourseParserArguments } from './CourseParserArguments'
 
 export abstract class ParseCourseProcessor extends SafeProcessor<CourseParserArguments> {
 }

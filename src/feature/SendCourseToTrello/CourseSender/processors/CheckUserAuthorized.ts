@@ -1,4 +1,4 @@
-import {CourseSenderProcessor} from '../courseSenderProcessor'
+import {CourseSenderProcessor} from '../CourseSenderProcessor'
 import { ChainCourseSenderArguments } from '../ChainCourseSenderArguments';
 import { Result } from '../../../../foundation/monads';
 

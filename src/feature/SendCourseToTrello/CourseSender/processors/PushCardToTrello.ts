@@ -1,5 +1,5 @@
 /// <reference path="../../../../foundation/TrelloApi/client.d.ts" />
-import { CourseSenderProcessor } from "../courseSenderProcessor";
+import { CourseSenderProcessor } from "../CourseSenderProcessor";
 import { ChainCourseSenderArguments } from "../ChainCourseSenderArguments";
 import { ChecklistModel, VerticalPosition } from "../../../../foundation";
 import { TrelloItemsCreator, TrelloItemsCreatorArguments } from '../../TrelloItemsCreator'

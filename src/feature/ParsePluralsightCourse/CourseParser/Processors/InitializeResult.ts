@@ -1,4 +1,4 @@
-import { CourseModel, SectionModel } from "../../models";
+import { CourseModel, SectionModel } from "../../Models";
 import { CourseParserArguments } from "../CourseParserArguments";
 import { ParseCourseProcessor } from "../ParseCourseProcessor";
 import { Some } from "../../../../foundation";

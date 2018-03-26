@@ -1,6 +1,6 @@
 import { SafeProcessor } from 'solid-pipelines';
 import { BaseMessageListenerProcessor } from '../BaseMessageListenerProcessor'
-import { MessageListenerArgs } from '../messageListenerArgs';
+import { MessageListenerArgs } from '../MessageListenerArgs';
 
 export class PreprocessingLogging extends BaseMessageListenerProcessor {
     public static readonly Instance = new PreprocessingLogging();

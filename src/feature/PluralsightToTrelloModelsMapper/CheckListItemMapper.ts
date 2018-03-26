@@ -1,4 +1,4 @@
-import { SectionModel } from "../ParsePluralsightCourse/models";
+import { SectionModel } from "../ParsePluralsightCourse/Models";
 import { Result, Ok, ChecklistItemModel, VerticalPosition } from "../../foundation";
 
 export class CheckListItemMapper {

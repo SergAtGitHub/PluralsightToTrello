@@ -1,4 +1,4 @@
-import {CourseSenderProcessor} from '../courseSenderProcessor'
+import {CourseSenderProcessor} from '../CourseSenderProcessor'
 import { ChainCourseSenderArguments } from '../ChainCourseSenderArguments';
 import { Result } from '../../../../foundation/monads';
 
@@ -10,8 +10,8 @@ export class UpdateTrelloToken extends CourseSenderProcessor {
     }
 
     SafeCondition(args: ChainCourseSenderArguments): boolean {
-        return super.SafeCondition(args) 
-            && !!args.AuthorizationChecker 
+        return super.SafeCondition(args)
+            && !!args.AuthorizationChecker
             && !args.AuthorizationChecker.authorized();
     }
 }

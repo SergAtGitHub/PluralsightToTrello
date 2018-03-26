@@ -1,5 +1,5 @@
 import { FillCourseDataProcessor } from "./FillCourseDataProcessor";
-import { CourseModel } from "../../models";
+import { CourseModel } from "../../Models";
 
 export class GetCourseDuration extends FillCourseDataProcessor {
     public static readonly Instance = new GetCourseDuration();
