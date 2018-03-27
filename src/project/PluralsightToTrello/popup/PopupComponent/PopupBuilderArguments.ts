@@ -4,6 +4,7 @@ import { TrelloBoardsCache, TrelloListsCache, TrelloDataCache } from "../../../.
 export class PopupBuilderArguments extends CommandPipelineArguments {
     Root: HTMLElement;
     ParseCourseButton: HTMLButtonElement;
+    RefreshData: HTMLButtonElement;
     Boards: HTMLSelectElement;
     Lists: HTMLSelectElement;
     NonAuthorizedControl: HTMLElement;

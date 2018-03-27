@@ -7,14 +7,15 @@ export class FillInComponents extends InitializePopupProcessor {
     public static readonly Instance = new FillInComponents();
 
     async SafeExecute(args: InitializePopupArguments): Promise<void> {
-        var getTrelloBoardsArgs = new GetTrelloBoardArguments();
-        var result = await TrelloBoardRepository.Instance.getTrelloBoards(getTrelloBoardsArgs);
-        var boards = getTrelloBoardsArgs.Result.unwrap().Boards;
+        var result = await TrelloBoardRepository.Instance.getTrelloBoards(true);
 
-        var cacheData = new TrelloBoardsCache();
-        cacheData.boards = boards;
-        args.TrelloDataCache.SetLastUsedBoards(cacheData);
-    
+        if (result.isErr()) {
+            args.AddError(result.err().unwrap());
+            return;
+        }
+
+        var boards = result.unwrap().Boards;
+
         for (let board of boards) {
             let opt: HTMLOptionElement = <HTMLOptionElement>(document.createElement('option'));
             [opt.value, opt.text] = [board.id, board.name];
@@ -22,8 +23,8 @@ export class FillInComponents extends InitializePopupProcessor {
         }
     }
 
-    SafeCondition(args: InitializePopupArguments) : boolean {
-        return super.SafeCondition(args) 
+    SafeCondition(args: InitializePopupArguments): boolean {
+        return super.SafeCondition(args)
             && args.UserIsAuthorized && args.BoardItems.isNone();
     }
 }

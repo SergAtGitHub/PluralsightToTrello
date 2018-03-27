@@ -1,8 +1,9 @@
 import { QueryPipelineArguments } from "../../../foundation";
 import { TrelloBoardsCollectionApiReturnResult } from ".";
+import { TrelloDataCache } from "../../TrelloDataCache";
 
 export class GetTrelloBoardArguments extends QueryPipelineArguments<TrelloBoardsCollectionApiReturnResult> {
-    constructor() {
-        super();
-    }
+    Cache: TrelloDataCache;
+    GetFromCache: boolean;
+    UpdateCache: boolean;
 }

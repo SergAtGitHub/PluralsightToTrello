@@ -10,6 +10,7 @@ export class BuildPagePipeline implements IPipeline {
             Processors.FillInBoardsCombobox.Instance,
             Processors.FillInListsCombobox.Instance,
             Processors.BuildParseCourseButton.Instance,
+            Processors.BuildRefreshDataButton.Instance,
             Processors.AppendControlsWhenAuthorizedToTrello.Instance,
             Processors.AppendControlsWhenNotAuthorizedToTrello.Instance,
             Processors.AddBoardEventListenerToUpdateLists.Instance,
