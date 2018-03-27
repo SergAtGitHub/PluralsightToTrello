@@ -1,0 +1,107 @@
+{
+	"Abstract Safe Processor": {
+		"prefix": "sp-abstractprocessor",
+		"body": [
+			"import { SafeProcessor } from \"solid-pipelines\";",
+			"import { ${1:${TM_FILENAME_BASE/(.*)(Processor?)$/$1/}Arguments} } from \"./$1\";",
+			"",
+			"export abstract class ${TM_FILENAME_BASE} extends SafeProcessor<$1> {  }",
+			""
+		],
+		"description": "Inserts an abstraction for safe processor of the context pipeline"
+	},
+	"Insert Safe Processor": {
+		"prefix": "sp-selfprocessor",
+		"body": [
+			"import { SafeProcessor } from \"solid-pipelines\";",
+			"import { ${1:${TM_FILENAME_BASE/(.*)(Processor?)$/$1/}Arguments} } from \"./$1\";",
+			"",
+			"export class ${TM_FILENAME_BASE} extends SafeProcessor<$1> {",
+			"\tpublic static readonly Instance = new ${TM_FILENAME_BASE}();",
+			"",
+			"\tpublic async SafeExecute(args: $1): Promise<void> {",
+			"\t\t$0",
+			"\t}",
+			"}",
+			""
+		],
+		"description": "Inserts a safe processor without base implementation"
+	},
+	"Insert Predefined Safe Processor": {
+		"prefix": "sp-predefinedprocessor",
+		"body": [
+			"import { ${1}Processor } from \"../$1Processor\";",
+			"import { ${2:$1Arguments} } from \"../$2\";",
+			"",
+			"export class ${TM_FILENAME_BASE} extends $1Processor {",
+			"\tpublic static readonly Instance = new ${TM_FILENAME_BASE}();",
+			"",
+			"\tpublic async SafeExecute(args: $2): Promise<void> {",
+			"\t\t$0",
+			"\t}",
+			"}",
+			""
+		],
+		"description": "Inserts a safe processor with a safe condition"
+	},
+	"Insert Predefined Safe Processor With Safe Condition": {
+		"prefix": "sp-safepredefinedprocessor",
+		"body": [
+			"import { ${1}Processor } from \"../$1Processor\";",
+			"import { ${2:$1Arguments} } from \"../$2\";",
+			"",
+			"export class ${TM_FILENAME_BASE} extends $1Processor {",
+			"\tpublic static readonly Instance = new ${TM_FILENAME_BASE}();",
+			"",
+			"\tpublic async SafeExecute(args: $2): Promise<void> {",
+			"\t\tthrow new Error(\"Not implemented.\");",
+			"\t}",
+			"",
+			"\tpublic SafeCondition(args: $2): boolean {",
+			"\t\treturn super.SafeCondition(args) && this.CustomCondition(args);",
+			"\t}",
+			"",
+			"\tpublic CustomCondition(args: $2): boolean {",
+			"\t\tlet safeCondition = ${0:args.};",
+			"\t\treturn safeCondition;",
+			"\t}",
+			"}",
+			""
+		],
+		"description": "Inserts a safe processor with a safe condition"
+	},
+	"Insert Safe Condition": {
+		"prefix": "sp-safecondition",
+		"body": [
+			"public SafeCondition(args: $1): boolean {",
+			"\treturn super.SafeCondition(args) && this.CustomCondition(args);",
+			"}",
+			"",
+			"public CustomCondition(args: $1): boolean {",
+			"\tlet safeCondition = ${0:args.};",
+			"\treturn safeCondition;",
+			"}",
+			""
+		],
+		"description": "Inserts a safe condition"
+	},
+	"Insert Pipeline": {
+		"prefix": "sp-pipeline",
+		"body": [
+			"import { IPipeline, IProcessor } from 'solid-pipelines'",
+			"import * as Processors from './processors'",
+			"",
+			"export class ${TM_FILENAME_BASE} implements IPipeline {",
+			"\tpublic static readonly Instance = new ${TM_FILENAME_BASE}();",
+			"",
+			"\tGetProcessors(): IProcessor[] {",
+			"\t\treturn [",
+			"\t\t\tProcessors.$1.Instance,",
+			"\t\t\tProcessors.$0.Instance",
+			"\t\t];",
+			"\t}",
+			"}"
+		],
+		"description": "Inserts a safe condition"
+	}
+}

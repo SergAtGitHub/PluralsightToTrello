@@ -22,3 +22,13 @@ For this purpose we have created a [Bulk Rename Utility File](https://github.com
 _Bulk Rename Utility:_ 
 - [website](http://www.bulkrenameutility.co.uk/Main_Intro.php) 
 - [chocolatey](https://chocolatey.org/packages/bulkrenameutility)
+
+## Solid Pipelines Snippets
+
+The project is built on top of SOLID pipelines module.
+
+For the purpose of faster development were created [Pipeline Snippets](https://github.com/SergAtGitHub/PluralsightToTrello/tree/master/utilities/typescript.json) which will help you faster create your Pipelines, Processors etc.
+
+_Pipelines JS:_ 
+- [website](https://github.com/SergAtGitHub/PipelinesJs) 
+- [npm](https://www.npmjs.com/package/solid-pipelines)
