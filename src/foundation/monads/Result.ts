@@ -100,7 +100,7 @@ export class Err<T, E> implements Result<T, E> {
     }
 
     isErr(): boolean {
-        return false;
+        return true;
     }
 
     ok(): Option<T> {

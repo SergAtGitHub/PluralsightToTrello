@@ -1,5 +1,7 @@
 import { Option, None, Some } from '../../foundation/monads'
 import { TrelloBoardDestinationModel, TrelloListDestinationModel } from '../ObtainTrelloDestination/Models'
+import { AddEntryToCacheExecutor, AddEntryToCacheArguments } from '../../foundation/ChromeCache/AddEntryToCache'
+import { Result } from '..';
 
 export class TrelloDataCache {
     public static readonly Instance = new TrelloDataCache();
@@ -24,10 +26,9 @@ export class TrelloDataCache {
         });
     }
 
-    async SetLastUsedLists(cacheData: TrelloListsCache) : Promise<void> {
-        var jsonVariable = {};
-        jsonVariable[TrelloListsCache.Key] = cacheData;
-        chrome.storage.sync.set(jsonVariable);
+    SetLastUsedLists(cacheData: TrelloListsCache) : Promise<Result<any, any>> {
+        return AddEntryToCacheExecutor.Instance.addEntry(
+            TrelloListsCache.Key, cacheData);
     }
 
     async SetLastSelectedList(listId: string) : Promise<void> {
@@ -61,10 +62,9 @@ export class TrelloDataCache {
             await this.GetFromChromeCache(TrelloBoardsCache.Key));
     }
 
-    async SetLastUsedBoards(cacheData: TrelloBoardsCache) : Promise<void> {
-        var jsonVariable = {};
-        jsonVariable[TrelloBoardsCache.Key] = cacheData;
-        chrome.storage.sync.set(jsonVariable);
+    SetLastUsedBoards(cacheData: TrelloBoardsCache) : Promise<Result<any, any>> {
+        return AddEntryToCacheExecutor.Instance.addEntry(
+                TrelloBoardsCache.Key, cacheData);
     }
 }
 
