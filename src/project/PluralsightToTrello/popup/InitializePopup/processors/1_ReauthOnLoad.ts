@@ -2,6 +2,7 @@
 
 import { InitializePopupProcessor } from "../InitializePopupProcessor";
 import { InitializePopupArguments } from "../InitializePopupArguments";
+import { PipelineContext } from "../../../../../../node_modules/solid-pipelines";
 
 export class ReauthOnLoad extends InitializePopupProcessor {
     public static readonly Instance = new ReauthOnLoad();

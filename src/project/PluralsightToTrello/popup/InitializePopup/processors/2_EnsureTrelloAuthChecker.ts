@@ -1,6 +1,6 @@
 import { InitializePopupProcessor } from "../InitializePopupProcessor";
 import { InitializePopupArguments, InitializePopupProperties } from "../InitializePopupArguments";
-import { ParseCourseMessageListener, TrelloAuthorizationChecker } from "../../../../../feature";
+import { TrelloAuthorizationChecker } from "../../../../../feature";
 
 export class EnsureTrelloAuthChecker extends InitializePopupProcessor {
     public static readonly Instance = new EnsureTrelloAuthChecker();

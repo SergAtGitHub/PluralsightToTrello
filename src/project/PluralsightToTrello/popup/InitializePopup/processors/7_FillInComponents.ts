@@ -1,7 +1,7 @@
 import { InitializePopupProcessor } from "../InitializePopupProcessor";
 import { TrelloBoardRepository, GetTrelloBoardArguments } from "../../../../../feature/ObtainTrelloDestination/Boards";
 import { TrelloDataCache, TrelloBoardsCache } from "../../../../../feature/TrelloDataCache";
-import { InitializePopupArguments } from "../InitializePopupArguments";
+import { InitializePopupArguments, InitializePopupProperties } from "../InitializePopupArguments";
 
 export class FillInComponents extends InitializePopupProcessor {
     public static readonly Instance = new FillInComponents();
@@ -25,6 +25,7 @@ export class FillInComponents extends InitializePopupProcessor {
 
     SafeCondition(args: InitializePopupArguments): boolean {
         return super.SafeCondition(args)
-            && args.UserIsAuthorized && args.BoardItems.isNone();
+            && args.GetPropertyValueOrDefault(InitializePopupProperties.UserIsAuthorized, false) 
+            && args.BoardItems.isNone();
     }
 }

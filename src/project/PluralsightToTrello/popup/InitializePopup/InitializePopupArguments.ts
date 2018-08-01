@@ -2,7 +2,6 @@ import { CommandPipelineArguments, ITrelloAuthorizationChecker, Option } from '.
 import { TrelloBoardsCache, TrelloListsCache, TrelloDataCache } from '../../../../feature/TrelloDataCache';
 
 export class InitializePopupArguments extends CommandPipelineArguments {
-    UserIsAuthorized: boolean;
     BoardItems: Option<TrelloBoardsCache>;
     ListItems: Option<TrelloListsCache>;
 
@@ -22,6 +21,7 @@ export class InitializePopupArguments extends CommandPipelineArguments {
 }
 
 export class InitializePopupProperties {
+    public static readonly UserIsAuthorized: string = "UserIsAuthorized";
     public static readonly TrelloAuthChecker: string = "TrelloAuthChecker";
     public static readonly TrelloDataCache: string = "TrelloDataCache";
     public static readonly BoardCombobox: string = "BoardCombobox";

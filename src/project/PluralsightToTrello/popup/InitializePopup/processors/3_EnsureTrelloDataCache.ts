@@ -6,6 +6,9 @@ export class EnsureTrelloDataCache extends InitializePopupProcessor {
     public static readonly Instance = new EnsureTrelloDataCache();
 
     async SafeExecute(args: InitializePopupArguments): Promise<void> {
-        args.AddOrSkipPropertyIfExists(InitializePopupProperties.TrelloDataCache, TrelloDataCache.Instance);
+        args.AddOrSkipPropertyIfExists(
+            InitializePopupProperties.TrelloDataCache, 
+            TrelloDataCache.Instance
+        );
     }
 }

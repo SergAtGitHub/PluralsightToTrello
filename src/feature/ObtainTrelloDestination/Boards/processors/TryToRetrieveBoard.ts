@@ -20,6 +20,7 @@ export class TryToRetrieveBoard extends GetTrelloBoardProcessor {
     }
 
     error(args: GetTrelloBoardArguments, response: any) {
+        console.log(response);
         args.AbortPipelineWithErrorMessage(response);
     }
 
