@@ -1,4 +1,3 @@
-import { SafeProcessor } from 'solid-pipelines'
-import { OnPopupClosedArguments } from './OnPopupClosedArguments';
+import { SafeProcessor, PipelineContext } from 'solid-pipelines'
 
-export abstract class OnPopupClosedProcessor extends SafeProcessor<OnPopupClosedArguments> { }
+export abstract class OnPopupClosedProcessor extends SafeProcessor<PipelineContext> { }

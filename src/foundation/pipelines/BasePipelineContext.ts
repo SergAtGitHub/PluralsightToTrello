@@ -14,7 +14,7 @@ export class BasePipelineContext extends PipelineContext {
     }
 
     hasProblems(): boolean {
-        return this.GetMessages(MessageFilter.All).length > 0;
+        return this.IsAborted;
     }
 
     LoggingEnabled: boolean;

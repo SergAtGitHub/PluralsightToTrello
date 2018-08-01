@@ -2,11 +2,28 @@ import { CommandPipelineArguments, ITrelloAuthorizationChecker, Option } from '.
 import { TrelloBoardsCache, TrelloListsCache, TrelloDataCache } from '../../../../feature/TrelloDataCache';
 
 export class InitializePopupArguments extends CommandPipelineArguments {
-    TrelloAuthChecker:ITrelloAuthorizationChecker;
-    TrelloDataCache: TrelloDataCache;
     UserIsAuthorized: boolean;
     BoardItems: Option<TrelloBoardsCache>;
     ListItems: Option<TrelloListsCache>;
-    BoardCombobox: HTMLSelectElement;
-    ListCombobox: HTMLSelectElement;
+
+    public get BoardCombobox(): HTMLSelectElement {
+        return this.GetPropertyValueOrUndefined(InitializePopupProperties.BoardCombobox);
+    }
+    public set BoardCombobox(value: HTMLSelectElement) {
+        this.AddOrSkipPropertyIfExists(InitializePopupProperties.BoardCombobox, value);
+    }
+
+    public get ListCombobox(): HTMLSelectElement {
+        return this.GetPropertyValueOrUndefined(InitializePopupProperties.ListCombobox);
+    }
+    public set ListCombobox(value: HTMLSelectElement) {
+        this.AddOrSkipPropertyIfExists(InitializePopupProperties.ListCombobox, value);
+    }
+}
+
+export class InitializePopupProperties {
+    public static readonly TrelloAuthChecker: string = "TrelloAuthChecker";
+    public static readonly TrelloDataCache: string = "TrelloDataCache";
+    public static readonly BoardCombobox: string = "BoardCombobox";
+    public static readonly ListCombobox: string = "ListCombobox";
 }

@@ -1,16 +1,21 @@
 import { InitializePopupProcessor } from "../InitializePopupProcessor";
-import { InitializePopupArguments } from "../InitializePopupArguments";
+import { InitializePopupArguments, InitializePopupProperties } from "../InitializePopupArguments";
+import { ITrelloAuthorizationChecker } from "../../../../../feature";
 
 export class AuthorizationCheck extends InitializePopupProcessor {
     public static readonly Instance = new AuthorizationCheck();
 
     async SafeExecute(args: InitializePopupArguments): Promise<void> {
-        if (!args.TrelloAuthChecker) {
+        let authChecker = 
+            args.GetPropertyValueOrUndefined<ITrelloAuthorizationChecker>(
+                InitializePopupProperties.TrelloAuthChecker);
+                
+        if (!authChecker) {
             args.AbortPipelineWithErrorMessage("You've missed an authorization checker, please, review the popup component builder.");
             return;
         }
 
-        let getAuthorizationResult = args.TrelloAuthChecker.isAuthorized();
+        let getAuthorizationResult = authChecker.isAuthorized();
         if (getAuthorizationResult.isErr()) {
             args.AbortPipelineWithErrorMessage(getAuthorizationResult.err().unwrap());
         }

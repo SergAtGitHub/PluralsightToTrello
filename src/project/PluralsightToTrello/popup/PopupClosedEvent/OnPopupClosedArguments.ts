@@ -1,8 +1,8 @@
 import { CommandPipelineArguments, ITrelloAuthorizationChecker, Option } from '../../../../foundation'
 import { TrelloDataCache } from '../../../../feature/TrelloDataCache';
 
-export class OnPopupClosedArguments extends CommandPipelineArguments {
-    TrelloDataCache: TrelloDataCache;
-    BoardCombobox: HTMLSelectElement;
-    ListCombobox: HTMLSelectElement;
+export class OnPopupClosedProperties {
+    public static readonly TrelloDataCache: string = "TrelloDataCache";
+    public static readonly BoardCombobox: string = "BoardCombobox";
+    public static readonly ListCombobox: string = "ListCombobox";
 }
