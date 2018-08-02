@@ -4,7 +4,7 @@ var webpack = require('webpack');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
+let options = {
 	context: path.resolve('./src/'),
 	entry: {
 		'js/popup.js': './project/PluralsightToTrello/popup/popup.ts',
@@ -72,3 +72,11 @@ module.exports = {
 		})
 	]
 }
+
+// Check another devtool options if needed:
+// https://webpack.js.org/configuration/devtool/
+if ((process.env.NODE_ENV || "development") === "development") {
+	options.devtool = "cheap-source-map";
+}
+
+module.exports = options;
